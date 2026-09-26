@@ -1,17 +1,21 @@
-// The slur mask (src/mask.js), the record-time scrub (scripts/scrub.js) and a hygiene check that fails
-// if any recorded name or symbol in data/, test/fixtures/ or bench/ matches the mask list, and (when the
-// repo's app/ is present) if the app's recorded data or any string/comment in the source spells a slur.
-// Offensive test inputs are written ROT13 (the same encoding src/mask.js keeps its list in).
+// The slur mask (src/mask.js), the record-time scrub (scripts/scrub.js) and hygiene checks that fail
+// if any recorded name or symbol in data/, test/fixtures/ or bench/ matches the mask list, if any
+// @handle, profile link or e-mail (a real person's identifier) is left in data/, test/fixtures/, bench/
+// or app/ data, including inside instruction bytes, and (when the repo's app/ is present) if the app's
+// recorded data or any string/comment in the source spells a slur.
+// Offensive test inputs are written ROT13 (the same encoding src/mask.js keeps its list in). Handles in
+// the tests below are made up.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { extract } from '../src/extract.js';
+import { extract, stampsFromMetadata } from '../src/extract.js';
 import { b58decode, u32le } from '../src/bytes.js';
 import { MASK, isOffensive, maskText, isMasked, placeholder, rot13 } from '../src/mask.js';
-import { scrubTx, rewriteBytes, b58encode } from '../scripts/scrub.js';
+import { scrubTx, rewriteBytes, b58encode, scrubIds, scrubTxIds, scrubIdsDeep, personalIds } from '../scripts/scrub.js';
+import { PROGRAMS } from '../src/tables.js';
 import { fixture, clone } from './helpers.js';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -184,4 +188,163 @@ test('hygiene: no string or comment in the library or app/ source spells a slur'
   }
   for (const f of ['README.md', 'index.d.ts']) if (fs.readFileSync(path.join(root, f), 'utf8').split(/\n|(?<=[.;:!?])\s+/).some(isOffensive)) found.push(f);
   assert.deepEqual(found, [], 'write offensive test inputs ROT13 (src/mask.js rot13)');
+});
+
+// ---- personal identifiers: @handles, profile links, e-mails -------------------------------------
+// Synthetic identifiers only: H is longer than any X handle (max 15), P longer than any platform's
+// username limit, and e-mails use the reserved example.com domain.
+const H = 'fake_handle_000000';
+const P = 'fake-profile-path-no-platform-allows-000000000';
+const pad = (s) => 'x'.repeat(s.length);
+
+test('scrubIds() pads handles, profile links and e-mails with x, same UTF-8 byte length, tool stamps kept', () => {
+  const cases = [
+    [`Fees to @${H} via UsePaid`, `Fees to @${pad(H)} via UsePaid`],
+    [`Created on https://rapidlaunch.io @${H}`, `Created on https://rapidlaunch.io @${pad(H)}`],
+    [`https://x.com/${P}/status/123`, `https://x.com/${pad(`${P}/status/123`)}`],
+    [`https://twitter.com/${P}`, `https://twitter.com/${pad(P)}`],
+    [`see github.com/${P}/repo`, `see github.com/${pad(`${P}/repo`)}`],
+    [`https://www.tiktok.com/@${P}/video/1`, `https://www.tiktok.com/${pad(`@${P}/video/1`)}`],
+    [`t.me/${P}`, `t.me/${pad(P)}`],
+    [`https://x.com/search?q=%40${H}&f=top`, `https://x.com/${pad(`search?q=%40${H}&f=top`)}`],
+    [`q=%40${H}`, `q=%40${pad(H)}`],
+    [`mail ${P}@example.com`, `mail ${pad(P)}@xxxxxxx.com`],
+    ['Launched on discord.gg/uxento', 'Launched on discord.gg/uxento'],
+    ['https://usepaid.app/t/7pm3vwf7 backpack.app/download', 'https://usepaid.app/t/7pm3vwf7 backpack.app/download'],
+    ['inbox.com/a netflix.com/b', 'inbox.com/a netflix.com/b'],
+    ['', ''],
+  ];
+  for (const [input, want] of cases) {
+    const got = scrubIds(input);
+    assert.equal(got, want, input);
+    assert.equal(Buffer.byteLength(got), Buffer.byteLength(input), `byte length of ${input}`);
+    assert.equal(scrubIds(got), got, 'idempotent');
+    assert.deepEqual(personalIds(got), []);
+  }
+  assert.deepEqual(personalIds(`Fees to @${H} via UsePaid`), [`@${H}`]);
+  assert.equal(scrubIds(null), null);
+});
+
+test('scrubbed descriptions still carry their tool stamp (labels never depend on a handle)', () => {
+  for (const [description, label] of [[`Fees to @${H} via UsePaid`, 'usepaid'], [`Created on https://rapidlaunch.io @${H}`, 'rapidlaunch'], ['Launched on discord.gg/uxento', 'uxento']]) {
+    assert.deepEqual(stampsFromMetadata({ description: scrubIds(description) }).map((s) => s.label), stampsFromMetadata({ description }).map((s) => s.label));
+    assert.equal(stampsFromMetadata({ description: scrubIds(description) })[0].label, label);
+  }
+});
+
+test('scrubTxIds() rewrites a handle in the create name and uri bytes, memos and logs; striations unchanged', () => {
+  const f = fixture('wrapper-cpi'); // name "real laptop" (11 bytes)
+  const raw = extract(f.tx, { mask: false });
+  const tx = clone(f.tx);
+  const uri2 = `${raw.meta.uri.slice(0, -(H.length + 2))}/@${H}`;
+  assert.ok(rewriteBytes(tx, [[raw.meta.name, '@0000000000'], [raw.meta.uri, uri2]]) >= 2);
+  tx.meta.logMessages = [`Program log: fees to @${H}`, 'Program data: AAAA'];
+  assert.deepEqual(scrubTxIds(tx).sort(), ['@0000000000', uri2].sort());
+  const after = extract(tx, { mask: false });
+  assert.equal(after.meta.name, '@xxxxxxxxxx');
+  assert.equal(after.meta.uri, `${raw.meta.uri.slice(0, -(H.length + 2))}/@${pad(H)}`);
+  assert.equal(after.meta.uriHost, raw.meta.uriHost);
+  assert.equal(after.meta.mint, raw.meta.mint);
+  assert.deepEqual(after.striations, raw.striations);
+  assert.deepEqual(after.stamps, raw.stamps);
+  assert.deepEqual(tx.meta.logMessages, [`Program log: fees to @${pad(H)}`, 'Program data: AAAA']);
+  assert.deepEqual(scrubTxIds(tx), [], 'idempotent');
+
+  const memoTx = { transaction: { signatures: [], message: { accountKeys: [PROGRAMS.memo], instructions: [{ programIdIndex: 0, accounts: [], data: b58encode(Buffer.from(`gm @${H}`)) }] } }, meta: {} };
+  assert.equal(scrubIdsDeep({ tx: memoTx }), 1);
+  assert.equal(Buffer.from(b58decode(memoTx.transaction.message.instructions[0].data)).toString('utf8'), `gm @${pad(H)}`);
+});
+
+// The guard is deliberately independent of scripts/scrub.js: its own patterns, a wider net.
+const SOCIAL = /(?<![\w-])(?:[\w-]+\.)*(?:x|twitter|github|t|telegram|instagram|tiktok|youtube|youtu|facebook|fb|twitch|kick|linktr|threads|bsky|warpcast|farcaster|reddit|medium|substack|linkedin|snapchat|truthsocial|discord|patreon)\.(?:com|me|ee|gg|tv|be|net|app|xyz)\/([^\s"'<>()[\]\\]+)/gi;
+const AT = /(?<![\w.%+-])@([A-Za-z0-9_]+)/g;
+const PCT_AT = /%40([A-Za-z0-9_]+)/gi;
+const EMAIL = /[\w.+-]+@(?:[\w-]+\.)+[a-z]{2,}/gi;
+/** Links on a social host that are a launch tool's own stamp (a label), not a person. */
+const ALLOWED_LINKS = new Set(['discord.gg/uxento']);
+const placeholderId = (s) => /^x+$/.test(s);
+
+/** Non-placeholder personal identifiers in s. */
+function idsIn(s) {
+  if (typeof s !== 'string' || !/[@.%]/.test(s)) return [];
+  const out = [];
+  for (const m of s.matchAll(SOCIAL)) {
+    const bare = m[0].replace(/^(?:https?:\/\/)?(?:www\.|m\.|mobile\.)?/i, '').replace(/\/$/, '').toLowerCase();
+    if (!placeholderId(m[1]) && !ALLOWED_LINKS.has(bare)) out.push(m[0]);
+  }
+  const noLinks = s.replace(SOCIAL, ' ');
+  for (const m of noLinks.matchAll(EMAIL)) if (!/^x+@(?:x+\.)+[a-z]{2,}$/i.test(m[0])) out.push(m[0]);
+  for (const re of [AT, PCT_AT]) for (const m of noLinks.replace(EMAIL, ' ').matchAll(re)) if (!placeholderId(m[1])) out.push(m[0]);
+  return out;
+}
+
+/** Every text a recorded transaction carries: Borsh strings in instruction data, memo text, logs, events. */
+function txTexts(tx) {
+  const m = tx.transaction?.message ?? tx.message;
+  const keys = [...(m?.accountKeys || []).map((k) => (typeof k === 'string' ? k : k.pubkey)), ...(tx.meta?.loadedAddresses?.writable || []), ...(tx.meta?.loadedAddresses?.readonly || [])];
+  const ixs = [...(m?.instructions || []), ...(tx.meta?.innerInstructions || []).flatMap((g) => g.instructions || [])];
+  const out = [];
+  try { const ex = extract(tx, { mask: false }); out.push(ex.meta.name, ex.meta.symbol, ex.meta.uri); } catch { /* not a create */ }
+  for (const ix of ixs) {
+    let u8;
+    try { u8 = b58decode(ix.data || ''); } catch { continue; }
+    out.push(...borshStrings(u8));
+    if (keys[ix.programIdIndex] === PROGRAMS.memo || keys[ix.programIdIndex] === PROGRAMS.memoV1) { try { out.push(td.decode(u8)); } catch { /* binary */ } }
+  }
+  for (const l of tx.meta?.logMessages || []) {
+    const pd = /^Program data: (.+)$/.exec(l);
+    out.push(...(pd ? borshStrings(Buffer.from(pd[1], 'base64')) : [l]));
+  }
+  return out;
+}
+
+/** Findings in a parsed JSON tree: every string value, and every transaction's bytes. */
+function idFindings(v, where, out = []) {
+  const walk = (x, p) => {
+    if (typeof x === 'string') { for (const id of idsIn(x)) out.push(`${where}${p}: ${id}`); return; }
+    if (Array.isArray(x)) { x.forEach((y, i) => walk(y, `${p}[${i}]`)); return; }
+    if (!x || typeof x !== 'object') return;
+    if (x.transaction?.message || (x.message?.accountKeys && x.meta)) for (const t of txTexts(x)) for (const id of idsIn(t)) out.push(`${where}${p} tx bytes: ${id}`);
+    for (const [k, y] of Object.entries(x)) walk(y, `${p}.${k}`);
+  };
+  walk(v, '');
+  return out;
+}
+
+/**
+ * Every file in a directory (not recursive): .json / .json.gz parsed, other text files as one string.
+ * jsonOnly: a directory that mixes code and data (app/lib) contributes only its data files.
+ */
+function scanDir(dir, out, stats, { jsonOnly = false } = {}) {
+  if (!fs.existsSync(path.join(root, dir))) return;
+  for (const n of fs.readdirSync(path.join(root, dir))) {
+    const f = path.join(root, dir, n);
+    if (fs.statSync(f).isDirectory() || n.startsWith('.') || (jsonOnly && !/\.json(\.gz)?$/.test(n))) continue;
+    stats.files++;
+    if (n.endsWith('.json.gz')) idFindings(JSON.parse(zlib.gunzipSync(fs.readFileSync(f)).toString('utf8')), `${dir}/${n}`, out);
+    else if (n.endsWith('.json')) idFindings(JSON.parse(fs.readFileSync(f, 'utf8')), `${dir}/${n}`, out);
+    else if (/\.(m?js|md|txt|csv)$/.test(n)) for (const id of idsIn(fs.readFileSync(f, 'utf8'))) out.push(`${dir}/${n}: ${id}`);
+  }
+}
+
+test('hygiene: the identifier guard sees handles, links and e-mails in text and in instruction bytes', () => {
+  assert.deepEqual(idsIn(`Fees to @${H} via UsePaid`), [`@${H}`]);
+  assert.deepEqual(idsIn(`https://www.x.com/${P}/status/1 and ${P}@example.com`), [`www.x.com/${P}/status/1`, `${P}@example.com`]);
+  assert.deepEqual(idsIn(`x.com/search?q=%40${H}`), [`x.com/search?q=%40${H}`]);
+  assert.deepEqual(idsIn(`q=%40${H}`), [`%40${H}`]);
+  assert.deepEqual(idsIn(scrubIds(`Fees to @${H} via @${P}, x.com/${P}, ${P}@example.com, Launched on discord.gg/uxento`)), []);
+  const f = fixture('wrapper-cpi');
+  const tx = clone(f.tx);
+  const raw = extract(tx, { mask: false });
+  rewriteBytes(tx, [[raw.meta.name, '@0000000000']]);
+  assert.ok(idFindings({ tx }, 'probe').length >= 1, 'a handle inside the create args is found');
+});
+
+test('hygiene: no @handle, profile link or e-mail in data/, test/fixtures/, bench/ or app/ data', () => {
+  const found = [];
+  const stats = { files: 0 };
+  for (const d of ['data', 'test/fixtures', 'bench']) scanDir(d, found, stats);
+  if (hasApp) for (const d of ['app/test/fixtures', 'app/lib', 'app/site/src/data']) scanDir(d, found, stats, { jsonOnly: d === 'app/lib' });
+  assert.ok(stats.files >= (hasApp ? 18 : 12), `scanned ${stats.files} files`);
+  assert.deepEqual(found, [], 'run `npm run scrub && npm run build:ref` (same-byte-length x padding, scripts/scrub.js)');
 });

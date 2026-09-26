@@ -7,8 +7,9 @@
 //    limit 8 → the create tx plus same-slot followers (10 credits each).
 // 2. Live creates: getSignaturesForAddress on the pump.fun mint authority (create-only feed), then
 //    getTransaction in batches of 10, then the metadata JSON at each create uri (no key).
-// Output: data/corpus.json.gz (trimmed txs: no logs, no balances; offensive names scrubbed to same-length
-// placeholders). Credits are printed at the end.
+// Output: data/corpus.json.gz (trimmed txs: no logs, no balances; offensive names and personal identifiers
+// such as @handles and x.com links scrubbed to same-byte-length placeholders, see scripts/scrub.js).
+// Credits are printed at the end.
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 import path from 'node:path';
@@ -94,13 +95,16 @@ await pool(live, 8, async (item) => {
 });
 console.log(`metadata fetched: ${live.filter((l) => l.metadata).length}/${live.length}`);
 
-// Scrub offensive names (same-byte-length placeholders, see scripts/scrub.js) before anything is written.
-const { scrubTx, maskWords } = await import('./scrub.js');
+// Scrub offensive names and personal identifiers (same-byte-length placeholders, see scripts/scrub.js)
+// before anything is written.
+const { scrubTx, maskWords, scrubIdsDeep } = await import('./scrub.js');
 const { maskText } = await import('../src/mask.js');
 let scrubbed = 0;
 for (const g of graduates) { scrubbed += scrubTx(g.tx).length ? 1 : 0; g.row.symbol = maskText(g.row.symbol); g.row.descSnippet = maskWords(g.row.descSnippet); }
 for (const l of live) { scrubbed += scrubTx(l.tx).length ? 1 : 0; if (l.metadata) l.metadata.description = maskWords(l.metadata.description); }
 console.log(`scrubbed offensive names in ${scrubbed} creates`);
+const ids = scrubIdsDeep(graduates) + scrubIdsDeep(live);
+console.log(`scrubbed ${ids} personal identifiers (@handles, profile links, e-mails)`);
 
 const corpus = { recordedAt: new Date().toISOString(), calls, graduates, live };
 fs.writeFileSync(path.join(root, 'data/corpus.json.gz'), zlib.gzipSync(JSON.stringify(corpus), { level: 9 }));
