@@ -1,0 +1,4 @@
+node_modules/
+data/.record-partial.json
+.DS_Store
+*.log

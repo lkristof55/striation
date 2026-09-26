@@ -1,0 +1,161 @@
+{
+  "measuredAt": "2026-09-25T13:38:53.472Z",
+  "machine": "Mac17,3 · Apple M5 · 10 cores · 16 GB",
+  "node": "v26.8.1",
+  "command": "cd oss && npm run bench",
+  "reference": {
+    "size": 487,
+    "stamped": 153,
+    "unlabelled": 334,
+    "builtAt": "2026-09-25T13:35:46.279Z",
+    "labels": {
+      "axiom": 3,
+      "clawpump": 3,
+      "j7tracker": 71,
+      "rapidlaunch": 17,
+      "stonkfun": 7,
+      "usepaid": 18,
+      "uxento": 34
+    }
+  },
+  "accuracy": {
+    "method": "leave-one-out, stamps hidden",
+    "k": 5,
+    "note": "Queries are the stamped reference instances; neighbours include unlabelled instances, which vote as unknown. A prediction of unknown counts as wrong.",
+    "n": 153,
+    "top1": 0.797,
+    "macroRecall": 0.489,
+    "majorityBaseline": 0.464,
+    "abstained": 0.15,
+    "perLabel": [
+      {
+        "label": "axiom",
+        "n": 3,
+        "recall": 0,
+        "precision": 0
+      },
+      {
+        "label": "clawpump",
+        "n": 3,
+        "recall": 0,
+        "precision": 0
+      },
+      {
+        "label": "j7tracker",
+        "n": 71,
+        "recall": 0.958,
+        "precision": 0.919
+      },
+      {
+        "label": "rapidlaunch",
+        "n": 17,
+        "recall": 0.882,
+        "precision": 1
+      },
+      {
+        "label": "stonkfun",
+        "n": 7,
+        "recall": 0.286,
+        "precision": 1
+      },
+      {
+        "label": "usepaid",
+        "n": 18,
+        "recall": 0.444,
+        "precision": 0.8
+      },
+      {
+        "label": "uxento",
+        "n": 34,
+        "recall": 0.853,
+        "precision": 1
+      }
+    ],
+    "confusion": {
+      "axiom": {
+        "j7tracker": 1,
+        "unknown": 2
+      },
+      "clawpump": {
+        "unknown": 3
+      },
+      "j7tracker": {
+        "j7tracker": 68,
+        "unknown": 3
+      },
+      "rapidlaunch": {
+        "rapidlaunch": 15,
+        "unknown": 1,
+        "usepaid": 1
+      },
+      "stonkfun": {
+        "unknown": 5,
+        "stonkfun": 2
+      },
+      "usepaid": {
+        "unknown": 7,
+        "j7tracker": 3,
+        "usepaid": 8
+      },
+      "uxento": {
+        "uxento": 29,
+        "j7tracker": 2,
+        "unknown": 2,
+        "usepaid": 1
+      }
+    },
+    "withoutXferDest": {
+      "top1": 0.797,
+      "macroRecall": 0.489,
+      "abstained": 0.15
+    }
+  },
+  "bench": [
+    {
+      "name": "extract() create txs per second",
+      "value": 4967,
+      "unit": "tx/s",
+      "command": "cd oss && npm run bench",
+      "detail": "487 recorded create txs, legacy + v0 + v1"
+    },
+    {
+      "name": "match() per query, reference n=487",
+      "value": 77.6,
+      "unit": "µs",
+      "command": "cd oss && npm run bench"
+    },
+    {
+      "name": "match() per query, 10k-instance replica",
+      "value": 1114,
+      "unit": "µs",
+      "command": "cd oss && npm run bench"
+    },
+    {
+      "name": "tokens per instance (mean)",
+      "value": 18.8,
+      "unit": "tokens",
+      "command": "cd oss && npm run bench"
+    },
+    {
+      "name": "Helius credits per /api/match (mint)",
+      "value": 10,
+      "unit": "credits",
+      "command": "cd oss && npm run bench",
+      "detail": "{\"getTransactionsForAddress\":1}"
+    },
+    {
+      "name": "Helius credits per /api/match (signature)",
+      "value": 1,
+      "unit": "credits",
+      "command": "cd oss && npm run bench",
+      "detail": "{\"getTransaction\":1}"
+    },
+    {
+      "name": "Helius credits per feed refresh (max)",
+      "value": 19,
+      "unit": "credits",
+      "command": "cd oss && npm run bench",
+      "detail": "{\"getSignaturesForAddress\":1,\"getTransaction\":18}"
+    }
+  ]
+}

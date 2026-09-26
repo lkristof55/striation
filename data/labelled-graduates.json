@@ -1,0 +1,1287 @@
+{
+ "source": "meta-scanner/data/{2026-09-24_1513,2026-09-24_2020,2026-09-25_1333}/raw.json pumpfun_graduated (2,023 unique graduates)",
+ "labelRules": {
+  "usepaid": "via UsePaid",
+  "j7tracker": "Deployed using https?://j7tracker",
+  "rapidlaunch": "Created on https?://rapidlaunch",
+  "uxento": "Launched on discord\\.gg/uxento",
+  "stonkfun": "stonkfun\\.xyz",
+  "clawpump": "clawpump\\.tech",
+  "axiom": "axiom\\.trade/t/"
+ },
+ "note": "Label = first matching rule on description+website. descCopies = how many graduates in the snapshots carry the exact same description (copied descriptions are noisy labels).",
+ "counts": {
+  "axiom": 3,
+  "clawpump": 3,
+  "j7tracker": 24,
+  "rapidlaunch": 10,
+  "stonkfun": 9,
+  "usepaid": 29,
+  "uxento": 10
+ },
+ "mintSuffix": {
+  "axiom": {
+   "pump": 2,
+   "other": 1
+  },
+  "clawpump": {
+   "pump": 3,
+   "other": 0
+  },
+  "j7tracker": {
+   "pump": 11,
+   "other": 13
+  },
+  "rapidlaunch": {
+   "pump": 10,
+   "other": 0
+  },
+  "stonkfun": {
+   "pump": 8,
+   "other": 1
+  },
+  "usepaid": {
+   "pump": 15,
+   "other": 14
+  },
+  "uxento": {
+   "pump": 10,
+   "other": 0
+  }
+ },
+ "rows": [
+  {
+   "mint": "G3fr2i6J8ykgUBtqYkfZ6vSrADZxWFmnt5bAqWbXpump",
+   "symbol": "SCAT",
+   "label": "axiom",
+   "allLabels": [
+    "axiom"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790269240000,
+   "athMcap": 1169570,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": ""
+  },
+  {
+   "mint": "71pFYsQprpfut1q6A3v954udMu3GUotqANX8aeLnw6dg",
+   "symbol": "CloudCat",
+   "label": "axiom",
+   "allLabels": [
+    "axiom"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 751,
+   "createdMs": 1790175749000,
+   "athMcap": 55104,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": ""
+  },
+  {
+   "mint": "BKnjGHHpXZW1xYERyJkFzPHW99qgzd3XiCoQc1yypump",
+   "symbol": "burrito",
+   "label": "axiom",
+   "allLabels": [
+    "axiom"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790171823000,
+   "athMcap": 17369,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": ""
+  },
+  {
+   "mint": "EGedEci3YJjv9NX4CyYgbd6vAqiuHNTRuAsrcv1Lpump",
+   "symbol": "OURO",
+   "label": "clawpump",
+   "allLabels": [
+    "clawpump"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790258722000,
+   "athMcap": 48911,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": ""
+  },
+  {
+   "mint": "BcgpyBwFuVDgNivYmBUJAGpjfL3yWVqCmmSSUfDVpump",
+   "symbol": "VISE",
+   "label": "clawpump",
+   "allLabels": [
+    "clawpump"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790244549000,
+   "athMcap": 6314911,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "VISE powered by clawpump.tech : Lock-to-earn on http://pump.fun. Trades pay a 2% fee into "
+  },
+  {
+   "mint": "51Drbkyq864egZehu8iRdb2gCqGdSh92GVXhMsRYpump",
+   "symbol": "EARNED",
+   "label": "clawpump",
+   "allLabels": [
+    "clawpump"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790203490000,
+   "athMcap": 52166,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": ""
+  },
+  {
+   "mint": "5DqSbDmD9YTN28kTG318WpDxVkHYJMVZyKsMhL69n6Vm",
+   "symbol": "CHILL",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790317763000,
+   "athMcap": 82504,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "BbWaZxgo51Na37XYCn6SzSvVoZTCkCT23RLxxiJJpump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790302164000,
+   "athMcap": 902041,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "A8mrJuGwfX2qxk8cSBiREqe2wLW9JBdSW12kpL48vR69",
+   "symbol": "10M",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790298165000,
+   "athMcap": 57046,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "4XEJNbhQwheNvKvXjAGeaCDZcj2HW54H2EWhmLS7pump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790290044000,
+   "athMcap": 711415,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "6JeJQ7xs9LJTGkP4hgZ8u3yeLnNc7wQJgxo5hFLxUxQ8",
+   "symbol": "FLYBRAINED",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790286507000,
+   "athMcap": 78685,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "4Cf16dgFaaMtYAdjLq5HvaH4RLHtAyFj6ZVSNuwyi35K",
+   "symbol": "MONKEY",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790278325000,
+   "athMcap": 52535,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "7szm4wYyY3nGw833E31Cr1YF5BuEAKDwMowNUJwPpump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790271701000,
+   "athMcap": 727443,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "DpXottaj9GxV8eRuwVW13TWJ4LLMQZXydVncdvXpump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790270938000,
+   "athMcap": 900773,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "9e7B9eT98vvZeRegqdRUqrdfTvbsF5hBB6ujdkZopump",
+   "symbol": "DH",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790263254000,
+   "athMcap": 52203,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "F3wXXM8Jh55EGNs98cF1cxwkvcRgdhLnDrRBAdr8pump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790257821000,
+   "athMcap": 759909,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "H9gS8VY72NsvzLbuFzREL5vTaixtE3y1ynX5eZV3pump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790254559000,
+   "athMcap": 479200,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "BJxwi9CjVXn5sK4jeLYrEgbxddMkax82HB8JmvYV4dSJ",
+   "symbol": "JIRACHI",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790248344000,
+   "athMcap": 55870,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "xzPWfZrW8wUsrzMiiY9QQRQQnJE9S9oV5DmiYQupump",
+   "symbol": "Vibekit",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790247244000,
+   "athMcap": 594853,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "DNJFYWLrzHLKpDi3AM6xW7SjDLRY6CikYAKCqfJaEiQP",
+   "symbol": "Meme",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790240744000,
+   "athMcap": 66559,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "GCdiWuRagkHuD3edSkc6GPzg3q42ojU2wZBQSbtoZHPq",
+   "symbol": "helmet",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790231038000,
+   "athMcap": 84756,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "b5fkCJGWxLDpF4TCi1xjVS1Uh5vZKpy7EuBFzMesB9p",
+   "symbol": "HAS",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790225602000,
+   "athMcap": 54542,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "4avvsHkpZAfAMmTDRiEHRsuhU4c2oWVgpazYKCykgeHz",
+   "symbol": "MrLeast",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790223821000,
+   "athMcap": 99975,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "6X26ibkQqC6wKfbvZaSkP4YrXtqgfNGu7nxVJdZmB1d2",
+   "symbol": "Pochi",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790218883000,
+   "athMcap": 106805,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "CkPiBF18SECc7FXLoCjZXV9o7PFzbsWstPjycupvpump",
+   "symbol": "GROK",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790207167000,
+   "athMcap": 768532,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "9yyxC9AtYxuijVrVfZjoYY2m3fRDuyYYF1VmKzRp9joC",
+   "symbol": "BOB",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790195485000,
+   "athMcap": 136045,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "H719yZDkecEC6mStAqX79aXdNoT3FBKys9Krpw4Lpump",
+   "symbol": "GEM",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker",
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790186512000,
+   "athMcap": 812164,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "9m4akJWS2sxCeyqGi87MWA8P35ftJNZbbT8BxZ9rpump",
+   "symbol": "PAY",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 24,
+   "createdMs": 1790184334000,
+   "athMcap": 1531809,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "FiRUHpAccfya9TnwuvETBNJ9CWR8byTiViHK1bvbKpay",
+   "symbol": "PAY",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790182982000,
+   "athMcap": 112475,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "Cb9ijne8W1Zjrd3o7jGMaaW5yrJVHZAAGUYnHoX3eB69",
+   "symbol": "EPEP",
+   "label": "j7tracker",
+   "allLabels": [
+    "j7tracker"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 24,
+   "createdMs": 1790174053000,
+   "athMcap": 8520,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Deployed using https://j7tracker.io"
+  },
+  {
+   "mint": "8A9xibGoFae6pbasVkFYw47uvdBaS3F7y4aUXmgEpump",
+   "symbol": "fre",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790308488000,
+   "athMcap": 9685,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "FJACueGsBZ2T2oJ9CSx8j8EguELbDvkcERRnjh3Dpump",
+   "symbol": "sBTC",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790264232000,
+   "athMcap": 69031,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Created on https://rapidlaunch.io @allocinitxyz"
+  },
+  {
+   "mint": "hycYxx4mSKC1df6EJq18migjZ5sfBY3a2xHYjmhpump",
+   "symbol": "SANDCAT",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790254248000,
+   "athMcap": 99278,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "CVnJdx6CUXeWQuEw6s58RrX2hfgptT89Pgz7DQrfpump",
+   "symbol": "GOFUNDPUMP",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790247909000,
+   "athMcap": 55162,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "EBSQcGpid1hvRCr6YshqdDdgNdJpGq1Et8CwFSsdpump",
+   "symbol": "Nutty",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790238332000,
+   "athMcap": 49224,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "AcZx2dcryYz5b8xhn9xhWc2ue4RTHro26ve8vbiDpump",
+   "symbol": "PHOSPHOR",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790237218000,
+   "athMcap": 140563,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "2r1QzuF3qG3Xq5NTNYG5XkPTsbUF3zWrdTs2JvGHpump",
+   "symbol": "OTC",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790231652000,
+   "athMcap": 198667,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "8ipUAsxRE1ngXjtjwmyV9MAwGPSbikHTgro4TAxUpump",
+   "symbol": "OBIE",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790205382000,
+   "athMcap": 72675,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "XQvVFz2jrrqFvhdG4NRd2o9xCQci9Xn9nGYVumBpump",
+   "symbol": "$GULL",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790193314000,
+   "athMcap": 4707275,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "6iRv823Gc4UiiwAvKAydpTj9LVxGN1pWDhThAzKipump",
+   "symbol": "AC714",
+   "label": "rapidlaunch",
+   "allLabels": [
+    "rapidlaunch"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 9,
+   "createdMs": 1790192296000,
+   "athMcap": 55030,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Created on https://rapidlaunch.io"
+  },
+  {
+   "mint": "DJ4tqS4CHnE19qyXxh3d9YhRSEd6GA5HPwu41q2fpump",
+   "symbol": "PILL",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 4,
+   "createdMs": 1790287519000,
+   "athMcap": 55154,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "-"
+  },
+  {
+   "mint": "aokR6J5WVDadh6tU7v4VKaQeT4MuQFipkzNiu9Gpump",
+   "symbol": "GP",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 2,
+   "createdMs": 1790282798000,
+   "athMcap": 1809558,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "RuneScape Gold was launched on StonkFun."
+  },
+  {
+   "mint": "JGeEdPbiC4ANHbNge4nA24F3S2WT2mhhrQUsnJupump",
+   "symbol": "XAI",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790280384000,
+   "athMcap": 52994,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": ""
+  },
+  {
+   "mint": "6Q5RWig45d2kSoxy7zwKSihwsNAVcBoAJWYum383pump",
+   "symbol": "CAT",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790268503000,
+   "athMcap": 75608,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": ""
+  },
+  {
+   "mint": "7N8dDSFK9FqP2j8jmeJ1XN47x9oWdhKn2NpzPhGMpump",
+   "symbol": "STONK",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790254100000,
+   "athMcap": 1640825,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "STONK was launched on StonkFun."
+  },
+  {
+   "mint": "4bo4yNaoibZgru3ifCN1PXfU5JPd2gdzd9BUK2Lkpump",
+   "symbol": "OAT",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 751,
+   "createdMs": 1790216197000,
+   "athMcap": 4042,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": ""
+  },
+  {
+   "mint": "ybGSdMweC2ogXkSRaTK4oEhZEkGmWUaAAjtUV98pump",
+   "symbol": "NYSE",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 4,
+   "createdMs": 1790181824000,
+   "athMcap": 81267,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "-"
+  },
+  {
+   "mint": "9oQYZXcKoJuofoBJNAMHPhwDEP3bYCGMhgeYPQXNYnZQ",
+   "symbol": "ZBURRITO",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 2,
+   "createdMs": 1790172158000,
+   "athMcap": 48028,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "https://www.youtube.com/watch?v=o-CRlTN55K4"
+  },
+  {
+   "mint": "sDYbw2KoXuuMwftSUDAtiCX9VDbj1ygyaS1tAbVpump",
+   "symbol": "NYSE",
+   "label": "stonkfun",
+   "allLabels": [
+    "stonkfun"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 2,
+   "createdMs": 1790168880000,
+   "athMcap": 124306,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "https://www.youtube.com/watch?v=o-CRlTN55K4"
+  },
+  {
+   "mint": "J141JCiXKGcrhDCgWUTCL9qz7h943iCibNiLNfqZpump",
+   "symbol": "0xquit",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790332460000,
+   "athMcap": 309592,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @0xQuit via UsePaid"
+  },
+  {
+   "mint": "7T9dsd3uNUjV7vRvEb6442XLN9QDH8STnTLTF1jdpump",
+   "symbol": "NONO",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 3,
+   "createdMs": 1790319488000,
+   "athMcap": 670962,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @JasonFurie via UsePaid"
+  },
+  {
+   "mint": "BY1HssRSPPgmm1dNfH1o2ExBN1xFSSB7q6YjdGmXpump",
+   "symbol": "NONO",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 3,
+   "createdMs": 1790317432000,
+   "athMcap": 525757,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @JasonFurie via UsePaid"
+  },
+  {
+   "mint": "8zF5yJdHFQA1xtfghdXkzpix8mQkjBFjXXeyUq33pump",
+   "symbol": "NONO",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 3,
+   "createdMs": 1790315222000,
+   "athMcap": 92557,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @JasonFurie via UsePaid"
+  },
+  {
+   "mint": "5piXiXotoMHrE6XEENN6Hpjmx4drwpMvftwTMzdkpump",
+   "symbol": "goblin",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790311826000,
+   "athMcap": 48002,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @foolibuster via UsePaid"
+  },
+  {
+   "mint": "2RVDnBV28GmFAHg3sDAX11MF6zjBxwF7iGSSuaDLpump",
+   "symbol": "MNEMOS",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790308927000,
+   "athMcap": 49466,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Fees to @rileyralmuto via UsePaid"
+  },
+  {
+   "mint": "5tk4jTmVQDfjarP2uGa7Z3PtMAFVsr6n4yA1M8csTznp",
+   "symbol": "WINRAR",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790258082000,
+   "athMcap": 102646,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Fees to @WinRAR_RARLAB via UsePaid"
+  },
+  {
+   "mint": "B4pLeAps53ZmSJbCrRAaafxv4iRnDGNjQwZKLXYJX1zK",
+   "symbol": "CUMINU",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790234381000,
+   "athMcap": 292608,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @spermracing via UsePaid"
+  },
+  {
+   "mint": "A2rzoxEZpjRWeXsQUSsCqoQ3VhD52947HVFUdMWvUSfW",
+   "symbol": "Abu",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790220801000,
+   "athMcap": 59975,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @therealabunutty via UsePaid"
+  },
+  {
+   "mint": "BEkHheGKbajbZHNRrCCiC1KQbN5k8fK5EhiB3sNqRF5z",
+   "symbol": "GROKPOD",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790219137000,
+   "athMcap": 98665,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @brianroemmele via UsePaid"
+  },
+  {
+   "mint": "6TcFqnzyxFE6bZPqNL7MimUsvggheDQrjwKUhGUKJFXY",
+   "symbol": "Rufo",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790218486000,
+   "athMcap": 384638,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @christopherrufo via UsePaid"
+  },
+  {
+   "mint": "9wYcfZYT7RcTfPAgT9LYPFLc1H7jRrgaHDCvNyaApump",
+   "symbol": "THING",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790213898000,
+   "athMcap": 201173,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @pandora_1o1 via UsePaid"
+  },
+  {
+   "mint": "AxZYPsQc2tFUWCvWCUd6sR2FWSJ8huqJbEuexmqXvGXo",
+   "symbol": "LYSIOS",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790211670000,
+   "athMcap": 78317,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @7y5105 via UsePaid"
+  },
+  {
+   "mint": "HGbxpmnYvjdm9HW2GA6YuC4kShC1d52WCcGJDLvzRg9C",
+   "symbol": "Computer",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 2,
+   "createdMs": 1790208822000,
+   "athMcap": 50850,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @parafactual via UsePaid"
+  },
+  {
+   "mint": "CvUX4G2tzq7J3ECmNvWZLayZYV6KpgQp6SJ5K8Uvsu5g",
+   "symbol": "parafactual",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 2,
+   "createdMs": 1790207728000,
+   "athMcap": 461369,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @parafactual via UsePaid"
+  },
+  {
+   "mint": "2A7c6qu9vHaefAni6H7KrjHPET1Jzq6KQWeE5gWGpump",
+   "symbol": "MOLTYATT",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790202652000,
+   "athMcap": 273404,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @steipete via UsePaid"
+  },
+  {
+   "mint": "PqgWBZcKzUU6w3xjM4kXfGbLU8UPcQNJj9q2nRbpump",
+   "symbol": "FAPE",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790201167000,
+   "athMcap": 61737,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @fomo via UsePaid"
+  },
+  {
+   "mint": "FA3EM4a1rB7PdGNwJrFMUidajnqLDrrpDHwSzb3wpump",
+   "symbol": "LUCIA",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790199574000,
+   "athMcap": 2292366,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @mannilperez via UsePaid"
+  },
+  {
+   "mint": "Bwy71b5nYZ4KwdzsnNkjZoRvtBjWier1ZZZvNqPrpump",
+   "symbol": "TR",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790198986000,
+   "athMcap": 50815,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @HaanzeR via UsePaid"
+  },
+  {
+   "mint": "euwCqqdorT6VCYgQjVg9jeT3dpXvjuv86EGQtBVpump",
+   "symbol": "SCATE",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790198735000,
+   "athMcap": 120365,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @solana via UsePaid"
+  },
+  {
+   "mint": "ASzzCYJ6enxWZCoDf1vNy8BYM6Ba66YqzVB28V2Ypump",
+   "symbol": "JEV",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790193027000,
+   "athMcap": 73640,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @alexandertw33ts via UsePaid"
+  },
+  {
+   "mint": "HeH8ig3uyQE46UDRjRMSjF5ChAi9hoJeaJkop56im78Z",
+   "symbol": "jev",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790192680000,
+   "athMcap": 70809,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @AlexanderTw33ts via UsePaid"
+  },
+  {
+   "mint": "563JVQQrNwonELv9svhGLQV8nDFoZLYyfmrcEVkiZLFt",
+   "symbol": "MULTIPLEX",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790187662000,
+   "athMcap": 124636,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @BrianRoemmele via UsePaid"
+  },
+  {
+   "mint": "6xTAiLG4Qp7Aokm6jX6XC4pyMxNT9cnJaCuvG83tAVsB",
+   "symbol": "ARK",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790187067000,
+   "athMcap": 112143,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @noahsarkscans via UsePaid"
+  },
+  {
+   "mint": "EWdtpa8SAWoY64w7eeGseBxxNZgjV7FbfmzG5LCATr9C",
+   "symbol": "CORGI",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790179614000,
+   "athMcap": 52939,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @realjohnmonarch via UsePaid"
+  },
+  {
+   "mint": "3pTS6Zs1HcDUXVo1FuXzKnsy2GJVmisvSTSyxg27pump",
+   "symbol": "DigiCash",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 1,
+   "createdMs": 1790175548000,
+   "athMcap": 925929,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @chaumdotcom via UsePaid"
+  },
+  {
+   "mint": "tWcfrmw9PexGap69U2Ub55cBzFvevd6ZuMQ42dbb7tf",
+   "symbol": "CX",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 1,
+   "createdMs": 1790174306000,
+   "athMcap": 202759,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @Nate_Esparza via UsePaid"
+  },
+  {
+   "mint": "NF8mGFr9ZjCpqgBPACkzxwowdgJBeBboqHxW8SXpump",
+   "symbol": "NYANCAT",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 2,
+   "createdMs": 1790171219000,
+   "athMcap": 655308,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @PRguitarman via UsePaid"
+  },
+  {
+   "mint": "61RM8PfsmeUWnv2DbKFnn9DYnXSCvnf1RJnMAoyj85TE",
+   "symbol": "NYANCAT",
+   "label": "usepaid",
+   "allLabels": [
+    "usepaid"
+   ],
+   "mintSuffixPump": false,
+   "descCopies": 2,
+   "createdMs": 1790170505000,
+   "athMcap": 49708,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Fees to @PRguitarman via UsePaid"
+  },
+  {
+   "mint": "Bqy9DSJGRbun7s8dr7mkN8fm3hPa44p64hhy3MQWpump",
+   "symbol": "Desk",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790317657000,
+   "athMcap": 337103,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "88drpsMZZmB8U66Lr2hTdNF71oUPVs59qwu3V5QPpump",
+   "symbol": "ZOOP",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790295991000,
+   "athMcap": 126480,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "8LfHnLzJQ1iaF2D328N6tqcp8tyeKAomXJqfH8onpump",
+   "symbol": "STONKBLEND",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790285572000,
+   "athMcap": 868926,
+   "snapshot": "2026-09-25_1333",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "DzRyoieNzu1sgJMoTu7hWmHjr21Lz5chGRMNfAE6pump",
+   "symbol": "CHUNK",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790269639000,
+   "athMcap": 51726,
+   "snapshot": "2026-09-24_2020",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "8mqcd11jFaXegrWYQSMQkBMNjo8aXBseKrdQENPGpump",
+   "symbol": "PUMPY",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790207577000,
+   "athMcap": 57318,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "GHPwq4wUbYiCgL3w5EATuxQHs75TDfXck3Ai6R8Ppump",
+   "symbol": "BATE",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790204664000,
+   "athMcap": 16986,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "FUVqYCWVCbH5EXsXPN2Pr1Juhf7SANEUybJFTnZ3pump",
+   "symbol": "Tragedy",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790184201000,
+   "athMcap": 3609710,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "HqAFNxnkaXuAgXeLFUfb2owdb9tpfRq8jTrow3UGpump",
+   "symbol": "GIGACAT",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790181812000,
+   "athMcap": 733103,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "FAkyTGdNTvS4s3JM9sRe7nfrpXDScLS9P6fSqq9Dpump",
+   "symbol": "Fund",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790174124000,
+   "athMcap": 47079,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  },
+  {
+   "mint": "D6FbvxB8PtC14ECK3tFUNtshSzEzivw3pcbuemKgpump",
+   "symbol": "fomopay",
+   "label": "uxento",
+   "allLabels": [
+    "uxento"
+   ],
+   "mintSuffixPump": true,
+   "descCopies": 10,
+   "createdMs": 1790164174000,
+   "athMcap": 26841971,
+   "snapshot": "2026-09-24_1513",
+   "descSnippet": "Launched on discord.gg/uxento"
+  }
+ ]
+}
