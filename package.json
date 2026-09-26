@@ -7,7 +7,7 @@
   "author": "Striation contributors",
   "repository": { "type": "git", "url": "https://github.com/lkristof55/striation" },
   "keywords": ["solana", "pump.fun", "transaction", "fingerprint", "forensics", "jaccard", "knn"],
-  "engines": { "node": ">=20.10" },
+  "engines": { "node": ">=22" },
   "main": "./src/index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -18,7 +18,7 @@
   "bin": { "striae": "./bin/striae.js" },
   "files": ["src", "bin", "data/reference.json", "index.d.ts", "README.md", "LICENSE"],
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test \"test/*.test.js\"",
     "bench": "node bench/bench.js",
     "build:ref": "node scripts/build-reference.js",
     "record": "node scripts/record.js",
