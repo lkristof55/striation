@@ -1,0 +1,329 @@
+{
+ "mint": "GTu73o8pNWaX9X6ZoUaVUsp3iGC3wxRhxfcqWaFqpump",
+ "signature": "45oeuZBncrFBmGdDacctyicXy5aktC6RFnNRBCJK7YbFDqwG1HTQmvTZEdJELDmCR19BKSPojZmQSHq3i7hkp4tC",
+ "slot": 450364976,
+ "blockTime": 1790342578,
+ "version": 1,
+ "name": "Trump Coin",
+ "symbol": "TrumpCoin",
+ "uri": "https://m.rapidlaunch.io/m/7l7LObxbR",
+ "via": "top-level",
+ "verdict": "match",
+ "label": "rapidlaunch",
+ "displayName": "Rapid Launch",
+ "confidence": 0.89,
+ "margin": 0.89,
+ "barrelId": "B-NH4X5C",
+ "stamp": {
+  "label": "rapidlaunch",
+  "kind": "fee.wallet",
+  "evidence": "rapidXMVLw5uBieKHDGvF9k4xSSDXyD2FC5wLTAajaJ"
+ },
+ "stampAgrees": true,
+ "striations": [
+  {
+   "id": "ix.seq=sys.transfer>sys.transfer>pump.create_v2>ata.create_idempotent>pump.buy_exact_quote_in_v2",
+   "family": "ix.seq",
+   "value": "sys.transfer>sys.transfer>pump.create_v2>ata.create_idempotent>pump.buy_exact_quote_in_v2",
+   "display": "sys.transfer > sys.transfer > pump.create_v2 > ata.create_idempotent > pump.buy_exact_quote_in_v2",
+   "weight": 3,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "cu.limit=600000",
+   "family": "cu.limit",
+   "value": "600000",
+   "display": "CU limit 600,000 (v1 config)",
+   "weight": 2,
+   "matched": true,
+   "source": {
+    "where": "config",
+    "ixIndex": null,
+    "hex": null
+   },
+   "bucket": "cu.limit~2^19"
+  },
+  {
+   "id": "xfer.dest=ASt2enHCghUdhSHnJkjzKRMbuM5YiGbrXrCXs5pRSMor",
+   "family": "xfer.dest",
+   "value": "ASt2enHCghUdhSHnJkjzKRMbuM5YiGbrXrCXs5pRSMor",
+   "display": "transfer to ASt2en…",
+   "weight": 2,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": 0,
+    "hex": "8c5a6690723d16af977438bc527bcbd905d71050e0d16328e5a5f313f04a3735"
+   }
+  },
+  {
+   "id": "buy.variant=buy_exact_quote_in_v2",
+   "family": "buy.variant",
+   "value": "buy_exact_quote_in_v2",
+   "display": "same-tx buy_exact_quote_in_v2",
+   "weight": 1.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 4,
+    "hex": "c2ab1c46684d5b2f"
+   }
+  },
+  {
+   "id": "mint.suffix=pump",
+   "family": "mint.suffix",
+   "value": "pump",
+   "display": "mint …pump (ground vanity)",
+   "weight": 1.5,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": null,
+    "hex": "e5c351c60221aa599fc34e11d0381259afc58b3834605821c4abdbe5a58d514f"
+   }
+  },
+  {
+   "id": "version=1",
+   "family": "version",
+   "value": "1",
+   "display": "tx version 1",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "meta",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "cu.source=v1-config",
+   "family": "cu.source",
+   "value": "v1-config",
+   "display": "budget lives in v1-config",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "config",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "xfer.count=1",
+   "family": "xfer.count",
+   "value": "1",
+   "display": "1 other transfer",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "create.variant=create_v2",
+   "family": "create.variant",
+   "value": "create_v2",
+   "display": "create_v2",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "args",
+    "ixIndex": 2,
+    "hex": "d6904cec5f8b31b4"
+   }
+  },
+  {
+   "id": "followers.adjacent=0",
+   "family": "followers.adjacent",
+   "value": "0",
+   "display": "0 adjacent same-slot txs",
+   "weight": 1,
+   "matched": false,
+   "source": {
+    "where": "followers",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=sys.transfer>sys.transfer",
+   "family": "ix.shingle",
+   "value": "sys.transfer>sys.transfer",
+   "display": "sys.transfer → sys.transfer",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 0,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=sys.transfer>pump.create_v2",
+   "family": "ix.shingle",
+   "value": "sys.transfer>pump.create_v2",
+   "display": "sys.transfer → pump.create_v2",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 1,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=pump.create_v2>ata.create_idempotent",
+   "family": "ix.shingle",
+   "value": "pump.create_v2>ata.create_idempotent",
+   "display": "pump.create_v2 → ata.create_idempotent",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 2,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=ata.create_idempotent>pump.buy_exact_quote_in_v2",
+   "family": "ix.shingle",
+   "value": "ata.create_idempotent>pump.buy_exact_quote_in_v2",
+   "display": "ata.create_idempotent → pump.buy_exact_quote_in_v2",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 3,
+    "hex": null
+   }
+  },
+  {
+   "id": "signers=2",
+   "family": "signers",
+   "value": "2",
+   "display": "2 signers",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "meta",
+    "ixIndex": null,
+    "hex": null
+   }
+  }
+ ],
+ "neighbours": [
+  {
+   "mint": "EBSQcGpid1hvRCr6YshqdDdgNdJpGq1Et8CwFSsdpump",
+   "signature": "3osNHUXVKwV8JbbFF13iv9bXcFqEpKTmBQC8LdfiKJogJfnMoGC9DmLD6rNb6RdyQPPUrt9fuDe1BZbAFRQiWUbJ",
+   "symbol": "Nutty",
+   "label": "rapidlaunch",
+   "similarity": 0.892,
+   "barrelId": "B-NH4X5C"
+  },
+  {
+   "mint": "8A9xibGoFae6pbasVkFYw47uvdBaS3F7y4aUXmgEpump",
+   "signature": "53MHqhGrK3uX49dj1Bv3m9j7zMDqNV3KMzFBGY6XTrzV8vq1i1wumHcoQ7fqd8gUwZWCjn5GdaLTTo5KEfomuoNn",
+   "symbol": "fre",
+   "label": "rapidlaunch",
+   "similarity": 0.795,
+   "barrelId": "B-NH4X5C"
+  },
+  {
+   "mint": "E7L5HWyu2u6vUQmNT2CJuac5hszkkANiXuCNnS4Xpump",
+   "signature": "2PGSvxmpjzCmXUbnXTdBGtAiNLfLPNyea2idVnojFvX1K3vNqigMpurboCikYe9ZxJzMWsgSCkd3QK8h57Nscykn",
+   "symbol": "RCT",
+   "label": "rapidlaunch",
+   "similarity": 0.784,
+   "barrelId": "B-NH4X5C"
+  },
+  {
+   "mint": "CJxHHa4yDMsgB7bsRv9ShMGX2eiBEoQ5d3LVczQYpump",
+   "signature": "3SWDN17LbWt3qNRJ2bpY2kk1ZwdBqo2i6WQ6wC34SXGqU4HtXETrhvuk1ii4jqJGmZW4Zo8hyyDuRW3kth5vLiJb",
+   "symbol": "HOLDOWEEN",
+   "label": "rapidlaunch",
+   "similarity": 0.784,
+   "barrelId": "B-NH4X5C"
+  },
+  {
+   "mint": "3EZQS1Dfd7zCC9ePRFuzwRRj5RiiNuHhhXtyznKXpump",
+   "signature": "4t9kxNfv5LDvTa6Ha4K81X5NbFfyM8dNgJGEjZ6qYR4wbLPm6wpsZY1fnU6MYrZuW85UE9tB4iG4GktErm6AJRu2",
+   "symbol": "GETCLAW",
+   "label": "rapidlaunch",
+   "similarity": 0.784,
+   "barrelId": "B-NH4X5C"
+  }
+ ],
+ "followers": {
+  "sameSlot": 0,
+  "adjacent": 0,
+  "sample": []
+ },
+ "barrelMates": {
+  "reference": 9,
+  "recent": 0,
+  "windowMinutes": 30,
+  "sample": [
+   {
+    "mint": "8A9xibGoFae6pbasVkFYw47uvdBaS3F7y4aUXmgEpump",
+    "symbol": "fre",
+    "blockTime": 1790308488
+   },
+   {
+    "mint": "hycYxx4mSKC1df6EJq18migjZ5sfBY3a2xHYjmhpump",
+    "symbol": "SANDCAT",
+    "blockTime": 1790254248
+   },
+   {
+    "mint": "EBSQcGpid1hvRCr6YshqdDdgNdJpGq1Et8CwFSsdpump",
+    "symbol": "Nutty",
+    "blockTime": 1790238332
+   },
+   {
+    "mint": "2r1QzuF3qG3Xq5NTNYG5XkPTsbUF3zWrdTs2JvGHpump",
+    "symbol": "OTC",
+    "blockTime": 1790231652
+   },
+   {
+    "mint": "E7L5HWyu2u6vUQmNT2CJuac5hszkkANiXuCNnS4Xpump",
+    "symbol": "RCT",
+    "blockTime": 1790343115
+   },
+   {
+    "mint": "CJxHHa4yDMsgB7bsRv9ShMGX2eiBEoQ5d3LVczQYpump",
+    "symbol": "HOLDOWEEN",
+    "blockTime": 1790342767
+   },
+   {
+    "mint": "3EZQS1Dfd7zCC9ePRFuzwRRj5RiiNuHhhXtyznKXpump",
+    "symbol": "GETCLAW",
+    "blockTime": 1790342724
+   },
+   {
+    "mint": "DLL5rW5XUMpyYp1evnCJa4E3BezXqFV1KdSNoUxWpump",
+    "symbol": "James",
+    "blockTime": 1790342380
+   }
+  ]
+ },
+ "closest": {
+  "label": "rapidlaunch",
+  "displayName": "Rapid Launch",
+  "score": 0.89
+ },
+ "comparedWith": {
+  "mint": "EBSQcGpid1hvRCr6YshqdDdgNdJpGq1Et8CwFSsdpump",
+  "signature": "3osNHUXVKwV8JbbFF13iv9bXcFqEpKTmBQC8LdfiKJogJfnMoGC9DmLD6rNb6RdyQPPUrt9fuDe1BZbAFRQiWUbJ",
+  "symbol": "Nutty",
+  "label": "rapidlaunch"
+ },
+ "source": "live",
+ "cached": false,
+ "ms": 236
+}

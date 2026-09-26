@@ -4,8 +4,9 @@
 // every striation stay the same: only the `name` / `symbol` strings become MASK.
 //
 // Normalisation defeats the usual evasions: case, diacritics and fullwidth forms (NFKD), zero-width
-// characters, Cyrillic/Greek look-alikes, leetspeak (n1gg4, f@g, $ as s), separators ("n.i.g", "f a g")
-// and stretched letters ("niiigga"). The list is deliberately small and aimed at slurs, not profanity.
+// characters, Cyrillic/Greek look-alikes, leetspeak (digits and symbols for letters, '$' as s), letters
+// spaced out one by one (with spaces or dots between them) and stretched letters. The list is
+// deliberately small and aimed at slurs, not profanity.
 
 export const MASK = '▇▇▇';
 const BLOCK = '▇'; // U+2587, 3 bytes in UTF-8
@@ -45,7 +46,7 @@ export function normalizeWords(s) {
     .replace(/(^|[^\p{L}\p{N}])\$+(?=[\p{L}\p{N}])/gu, '$1') // ticker prefix: "$ABC" → "abc"
     .replace(/./gsu, (c) => HOMOGLYPH[c] || LEET[c] || c);
   const raw = t.split(/[^a-z]+/).filter(Boolean);
-  // Letters spaced out one by one ("F A G", "n.i.g.g.a") are one word.
+  // Letters spaced out one by one ("A B C", "a.b.c") are one word.
   const words = [];
   for (const w of raw) {
     const last = words.length - 1;

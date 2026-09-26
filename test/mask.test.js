@@ -1,5 +1,6 @@
 // The slur mask (src/mask.js), the record-time scrub (scripts/scrub.js) and a hygiene check that fails
-// if any recorded name or symbol in data/, test/fixtures/ or bench/ matches the mask list.
+// if any recorded name or symbol in data/, test/fixtures/ or bench/ matches the mask list, and (when the
+// repo's app/ is present) if the app's recorded data or any string/comment in the source spells a slur.
 // Offensive test inputs are written ROT13 (the same encoding src/mask.js keeps its list in).
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -137,4 +138,50 @@ test('hygiene: the scrubbed creates still extract, masked', () => {
   assert.equal(ex.meta.masked, true);
   const ref = JSON.parse(fs.readFileSync(path.join(root, 'data/reference.json'), 'utf8'));
   assert.equal(ref.instances.filter((i) => i.symbol === MASK).length, 2, 'the two scrubbed reference symbols read MASK');
+});
+
+// ---- hygiene: the live app in app/ (its fixtures, the feed fallback, the site's SAMPLE rows) and the
+// source text of the library and the app. Reads files only; the library never imports from app/.
+
+const appDir = path.join(root, 'app');
+const hasApp = fs.existsSync(path.join(appDir, 'package.json'));
+
+test('hygiene: no recorded name or symbol in app/ data matches the mask list', { skip: !hasApp && 'no app/ in this checkout' }, () => {
+  const jsonIn = (d) => (fs.existsSync(path.join(appDir, d)) ? fs.readdirSync(path.join(appDir, d)).filter((f) => f.endsWith('.json')).map((f) => `${d}/${f}`) : []);
+  const files = [...jsonIn('test/fixtures'), ...jsonIn('lib'), ...jsonIn('site/src/data')];
+  const found = [];
+  for (const f of files) {
+    const j = JSON.parse(fs.readFileSync(path.join(appDir, f), 'utf8'));
+    if (j.tx) found.push(...txFindings(j.tx, `app/${f}`));
+    textFindings(j, `app/${f}`, null, found);
+  }
+  assert.ok(files.length >= 5, `scanned ${files.length} app data files`);
+  assert.deepEqual(found, [], 'scrub with placeholder() of the same UTF-8 byte length (see app/test/record.mjs)');
+});
+
+// Every string literal and comment in .js/.mjs/.ts, and every sentence of the docs, config and pages.
+const LITERALS = /\/\/[^\n]*|\/\*[\s\S]*?\*\/|'(?:[^'\\\n]|\\.)*'|"(?:[^"\\\n]|\\.)*"|`(?:[^`\\]|\\.)*`/g;
+const SKIP_DIRS = new Set(['node_modules', 'dist', '.data', '.git', 'data', 'fixtures']);
+function sourceFindings(dir, out = []) {
+  for (const n of fs.readdirSync(dir)) {
+    if (SKIP_DIRS.has(n)) continue;
+    const f = path.join(dir, n);
+    if (fs.statSync(f).isDirectory()) { sourceFindings(f, out); continue; }
+    if (!/\.(m?js|ts|html|md|css|ya?ml|toml|example)$/.test(n)) continue;
+    const t = fs.readFileSync(f, 'utf8');
+    const pieces = /\.(m?js|ts)$/.test(n) ? t.match(LITERALS) || [] : t.split(/\n|(?<=[.;:!?])\s+/);
+    if (pieces.some(isOffensive)) out.push(path.relative(root, f));
+  }
+  return out;
+}
+
+test('hygiene: no string or comment in the library or app/ source spells a slur', () => {
+  const probe = `const name = '${bad('snt')}'; // ${bad('avttn')}`;
+  assert.equal(probe.match(LITERALS).filter(isOffensive).length, 2, 'the scanner sees literals and comments');
+  const found = [];
+  for (const d of ['src', 'bin', 'bench', 'examples', 'scripts', 'test', ...(hasApp ? ['app'] : [])]) {
+    if (fs.existsSync(path.join(root, d))) sourceFindings(path.join(root, d), found);
+  }
+  for (const f of ['README.md', 'index.d.ts']) if (fs.readFileSync(path.join(root, f), 'utf8').split(/\n|(?<=[.;:!?])\s+/).some(isOffensive)) found.push(f);
+  assert.deepEqual(found, [], 'write offensive test inputs ROT13 (src/mask.js rot13)');
 });

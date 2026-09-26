@@ -1,0 +1,426 @@
+{
+ "recordedAt": "2026-09-25T13:39:09.715Z",
+ "input": "3nfJAEXmv55ZYVZayj78gkfuRBzsSs9keK4Sa4Zbjf5j",
+ "result": {
+  "mint": "3nfJAEXmv55ZYVZayj78gkfuRBzsSs9keK4Sa4Zbjf5j",
+  "signature": "5gZR2qX5Vv7VfxKbivzsi5AbEZ5VvmL1Vi5WJ5aqgm5WpFxa1RSbWJ9Ms9d2wweFdsWv43T1d1TfCQxi5nLjtfkw",
+  "slot": 450363597,
+  "blockTime": 1790342210,
+  "version": 0,
+  "name": "backpack official meme?",
+  "symbol": "GOR",
+  "uri": "https://metadata.j7tracker.io/metadata/ND8PzQ7pJD.json",
+  "via": "top-level",
+  "verdict": "match",
+  "label": "j7tracker",
+  "displayName": "j7tracker",
+  "confidence": 1,
+  "margin": 1,
+  "barrelId": "B-5YHDCP",
+  "stamp": {
+   "label": "j7tracker",
+   "kind": "uri.host",
+   "evidence": "metadata.j7tracker.io"
+  },
+  "stampAgrees": true,
+  "striations": [
+   {
+    "id": "alt=gA86fYtgdnZjVjZLKtx49fZxbu4f8F5YeqJyrwbzE9T",
+    "family": "alt",
+    "value": "gA86fYtgdnZjVjZLKtx49fZxbu4f8F5YeqJyrwbzE9T",
+    "display": "lookup table gA86fY…",
+    "weight": 4,
+    "matched": true,
+    "source": {
+     "where": "key",
+     "ixIndex": null,
+     "hex": "0a07f75c7607082cce8219c99b7cc22aa12843efd3b99c55b96501c2ab6e26c6"
+    }
+   },
+   {
+    "id": "cu.price=3333333",
+    "family": "cu.price",
+    "value": "3333333",
+    "display": "CU price 3,333,333 µλ",
+    "weight": 3,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 1,
+     "hex": "03d5dc320000000000"
+    },
+    "bucket": "cu.price~2^21"
+   },
+   {
+    "id": "ix.seq=cb.limit>cb.price>pump.create_v2>ata.create_idempotent>pump.buy>sys.transfer>sys.transfer",
+    "family": "ix.seq",
+    "value": "cb.limit>cb.price>pump.create_v2>ata.create_idempotent>pump.buy>sys.transfer>sys.transfer",
+    "display": "cb.limit > cb.price > pump.create_v2 > ata.create_idempotent > pump.buy > sys.transfer > sys.transfer",
+    "weight": 3,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "cu.limit=300000",
+    "family": "cu.limit",
+    "value": "300000",
+    "display": "CU limit 300,000",
+    "weight": 2,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 0,
+     "hex": "02e0930400"
+    },
+    "bucket": "cu.limit~2^18"
+   },
+   {
+    "id": "tip.relay=astralane",
+    "family": "tip.relay",
+    "value": "astralane",
+    "display": "tip relay astralane",
+    "weight": 2,
+    "matched": true,
+    "source": {
+     "where": "key",
+     "ixIndex": 6,
+     "hex": "92c2d8d1ecccdfc47ded149c52de716756c1d3f46e5f9aad5015f8471ef93228"
+    }
+   },
+   {
+    "id": "xfer.dest=nozuC8vx3P1atX8eGNh31YBgTuSNtDa4FpZVKD23kU4",
+    "family": "xfer.dest",
+    "value": "nozuC8vx3P1atX8eGNh31YBgTuSNtDa4FpZVKD23kU4",
+    "display": "transfer to nozuC8…",
+    "weight": 2,
+    "matched": true,
+    "source": {
+     "where": "key",
+     "ixIndex": 5,
+     "hex": "0bbc470beb5f8321ae2c3215f791d36790fdcd3dbd311af1ace114ca25ec7c8d"
+    }
+   },
+   {
+    "id": "tip.lamports=1000000",
+    "family": "tip.lamports",
+    "value": "1000000",
+    "display": "astralane tip 0.001 SOL",
+    "weight": 1.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 6,
+     "hex": "0200000040420f0000000000"
+    },
+    "bucket": "tip.lamports~2^19"
+   },
+   {
+    "id": "buy.variant=buy",
+    "family": "buy.variant",
+    "value": "buy",
+    "display": "same-tx buy",
+    "weight": 1.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 4,
+     "hex": "66063d1201daebea"
+    }
+   },
+   {
+    "id": "mint.suffix=other",
+    "family": "mint.suffix",
+    "value": "other",
+    "display": "mint not ground",
+    "weight": 1.5,
+    "matched": true,
+    "source": {
+     "where": "key",
+     "ixIndex": null,
+     "hex": "2969cfbf6ce062bc572e32d3eab59cc53d06f20c513c7e4556a9a0cf1962435a"
+    }
+   },
+   {
+    "id": "version=0",
+    "family": "version",
+    "value": "0",
+    "display": "tx version 0",
+    "weight": 1,
+    "matched": true,
+    "source": {
+     "where": "meta",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "cu.source=ix",
+    "family": "cu.source",
+    "value": "ix",
+    "display": "budget lives in ix",
+    "weight": 1,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "tip.position=after-create",
+    "family": "tip.position",
+    "value": "after-create",
+    "display": "tip after-create",
+    "weight": 1,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "xfer.count=1",
+    "family": "xfer.count",
+    "value": "1",
+    "display": "1 other transfer",
+    "weight": 1,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "create.variant=create_v2",
+    "family": "create.variant",
+    "value": "create_v2",
+    "display": "create_v2",
+    "weight": 1,
+    "matched": true,
+    "source": {
+     "where": "args",
+     "ixIndex": 2,
+     "hex": "d6904cec5f8b31b4"
+    }
+   },
+   {
+    "id": "followers.adjacent=0",
+    "family": "followers.adjacent",
+    "value": "0",
+    "display": "0 adjacent same-slot txs",
+    "weight": 1,
+    "matched": false,
+    "source": {
+     "where": "followers",
+     "ixIndex": null,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=cb.limit>cb.price",
+    "family": "ix.shingle",
+    "value": "cb.limit>cb.price",
+    "display": "cb.limit → cb.price",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 0,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=cb.price>pump.create_v2",
+    "family": "ix.shingle",
+    "value": "cb.price>pump.create_v2",
+    "display": "cb.price → pump.create_v2",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 1,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=pump.create_v2>ata.create_idempotent",
+    "family": "ix.shingle",
+    "value": "pump.create_v2>ata.create_idempotent",
+    "display": "pump.create_v2 → ata.create_idempotent",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 2,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=ata.create_idempotent>pump.buy",
+    "family": "ix.shingle",
+    "value": "ata.create_idempotent>pump.buy",
+    "display": "ata.create_idempotent → pump.buy",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 3,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=pump.buy>sys.transfer",
+    "family": "ix.shingle",
+    "value": "pump.buy>sys.transfer",
+    "display": "pump.buy → sys.transfer",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 4,
+     "hex": null
+    }
+   },
+   {
+    "id": "ix.shingle=sys.transfer>sys.transfer",
+    "family": "ix.shingle",
+    "value": "sys.transfer>sys.transfer",
+    "display": "sys.transfer → sys.transfer",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "ix",
+     "ixIndex": 5,
+     "hex": null
+    }
+   },
+   {
+    "id": "signers=2",
+    "family": "signers",
+    "value": "2",
+    "display": "2 signers",
+    "weight": 0.5,
+    "matched": true,
+    "source": {
+     "where": "meta",
+     "ixIndex": null,
+     "hex": null
+    }
+   }
+  ],
+  "neighbours": [
+   {
+    "mint": "ABPnRTuWfe8Vd3hGBst2C7YbUmcXnaTU9XibTC68Z5ho",
+    "signature": "65zoh1GN592XZ2QzmBW2nWn3BoLvdmr8Nb3uqgy2W4vV98A2KTCvixb2SFWWGjnb686fSHQJtosRNTXSyH1Pc3T3",
+    "symbol": "▇▇__",
+    "label": "j7tracker",
+    "similarity": 1,
+    "barrelId": "B-5YHDCP"
+   },
+   {
+    "mint": "B5byta4pkkX7VqbPDMUv1jiSMDbQpZ2LD4jMUgrJq2y7",
+    "signature": "5ZxuM1w9LFXGPtBWyVWT4SA2zwsP6fFPUy4pKpfG5Yb5kwfjiRVsC8SoqdZZuZxyH7F8ahe1MA6ejZ9y8qdngkzk",
+    "symbol": "MIC",
+    "label": "j7tracker",
+    "similarity": 1,
+    "barrelId": "B-5YHDCP"
+   },
+   {
+    "mint": "6xTAiLG4Qp7Aokm6jX6XC4pyMxNT9cnJaCuvG83tAVsB",
+    "signature": "5afPx2M7obnXon8N8jsheDbRr1tsFU3zHn6VRC1PNWw7QgsyGT6sKPbD8JAV7aEJqBFfiy8N9cAT2guaU349u2Zf",
+    "symbol": "ARK",
+    "label": "j7tracker",
+    "similarity": 0.875,
+    "barrelId": "B-5YHDCP"
+   },
+   {
+    "mint": "7gvDfQrBbDivNA79YUt25H6VKqeHuFkrpvDvwCENEGxS",
+    "signature": "4CdA3u3QZo1fsYHLVdq9P6hLTNoKYv9e31CQzqj3QxRMv5AbGdm5toDLSaY17M9qF5rvaGpaW27KVVWYm2NWmc9w",
+    "symbol": "🎒",
+    "label": "j7tracker",
+    "similarity": 0.871,
+    "barrelId": "B-5YHDCP"
+   },
+   {
+    "mint": "DDC6MfzgVNJ4S3NRsiAVNJn5a1i1p1hcAn5u64MF2tLM",
+    "signature": "2fqHTMwQv8FDVBSc1N6W5aTg7ETtb9Mfh5JB9fGdQ7fxNrNPoQ5Mqh7arStPgRFpgmE53rZDKkX3BFXfQSvYe92Q",
+    "symbol": "GOR",
+    "label": "j7tracker",
+    "similarity": 0.871,
+    "barrelId": "B-5YHDCP"
+   }
+  ],
+  "followers": {
+   "sameSlot": 0,
+   "adjacent": 0,
+   "sample": []
+  },
+  "barrelMates": {
+   "reference": 9,
+   "recent": 0,
+   "windowMinutes": 30,
+   "sample": [
+    {
+     "mint": "5tk4jTmVQDfjarP2uGa7Z3PtMAFVsr6n4yA1M8csTznp",
+     "symbol": "WINRAR",
+     "blockTime": 1790258082
+    },
+    {
+     "mint": "6xTAiLG4Qp7Aokm6jX6XC4pyMxNT9cnJaCuvG83tAVsB",
+     "symbol": "ARK",
+     "blockTime": 1790187067
+    },
+    {
+     "mint": "7gvDfQrBbDivNA79YUt25H6VKqeHuFkrpvDvwCENEGxS",
+     "symbol": "🎒",
+     "blockTime": 1790342949
+    },
+    {
+     "mint": "ABPnRTuWfe8Vd3hGBst2C7YbUmcXnaTU9XibTC68Z5ho",
+     "symbol": "▇▇__",
+     "blockTime": 1790342629
+    },
+    {
+     "mint": "DDC6MfzgVNJ4S3NRsiAVNJn5a1i1p1hcAn5u64MF2tLM",
+     "symbol": "GOR",
+     "blockTime": 1790342280
+    },
+    {
+     "mint": "9zkCQhMQ9KcbLbxNPniBKL7A5LaVMHBBTFHz6Ca7TnFA",
+     "symbol": "GOR",
+     "blockTime": 1790342279
+    },
+    {
+     "mint": "B5byta4pkkX7VqbPDMUv1jiSMDbQpZ2LD4jMUgrJq2y7",
+     "symbol": "MIC",
+     "blockTime": 1790342257
+    },
+    {
+     "mint": "57CimKvZHdesPujkZuE9oTcie77CXGXFcWdNk2pFBuKK",
+     "symbol": "GOR",
+     "blockTime": 1790342214
+    }
+   ]
+  },
+  "closest": {
+   "label": "j7tracker",
+   "displayName": "j7tracker",
+   "score": 1
+  },
+  "comparedWith": {
+   "mint": "ABPnRTuWfe8Vd3hGBst2C7YbUmcXnaTU9XibTC68Z5ho",
+   "signature": "65zoh1GN592XZ2QzmBW2nWn3BoLvdmr8Nb3uqgy2W4vV98A2KTCvixb2SFWWGjnb686fSHQJtosRNTXSyH1Pc3T3",
+   "symbol": "▇▇__",
+   "label": "j7tracker"
+  },
+  "source": "fixture",
+  "cached": true,
+  "ms": 295
+ }
+}

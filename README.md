@@ -198,6 +198,17 @@ Token names are attacker-controlled text, so the recorded data is scrubbed: 3 li
 
 GitHub searches for "launch tool fingerprint solana", "transaction fingerprint solana" and "pump.fun deployer detection" returned no repos on 2026-09-25.
 
+## The live app
+
+[`app/`](app/README.md) is the complete source of **https://striation.netlify.app**: the Netlify Functions that run this library on live pump.fun creates (`/api/match`, `/api/feed`, `/api/barrels`, `/api/stats`, `/api/health`, plus a scheduled feed refresh every 5 minutes), and the site. The functions import `src/`, `data/reference.json` and `bench/results.json` from this repo, so the demo is the library; the library never imports from `app/`.
+
+```bash
+cd app && npm ci && cp .env.example .env   # put a Helius key in .env
+npm test && npm run build && npm run dev   # → http://localhost:8888
+```
+
+Deploy your own copy: create a Netlify site from this repo (the root `netlify.toml` builds `app/`) and set `HELIUS_API_KEY`. Details, endpoints, costs and asset credits: [`app/README.md`](app/README.md).
+
 ## License
 
 MIT © 2026 Striation contributors. This library is the engine of the Striation project site.

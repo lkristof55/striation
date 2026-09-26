@@ -1,0 +1,381 @@
+{
+ "mint": "3xCqfui9VWUjL2wDudD86Mpq672fqer138DHzyuTpump",
+ "signature": "D6hL6XXhDgtT6ykwdRPNifHukTFXeerACXd9yomMWNf4gKB26brniaZ9fs7jZnKJjZs8gXRcp7SRE8RoaV2H6go",
+ "slot": 450364214,
+ "blockTime": 1790342376,
+ "version": 0,
+ "name": "TWEET SAYS LETS FIND MEMECOINS T",
+ "symbol": "HWB",
+ "uri": "https://meta.uxento.io/data/2656dc75-64a0-4e21-bb2e-b437d5560c5e",
+ "via": "top-level",
+ "verdict": "match",
+ "label": "uxento",
+ "displayName": "uxento",
+ "confidence": 1,
+ "margin": 1,
+ "barrelId": "B-CY4PJC",
+ "stamp": {
+  "label": "uxento",
+  "kind": "uri.host",
+  "evidence": "meta.uxento.io"
+ },
+ "stampAgrees": true,
+ "striations": [
+  {
+   "id": "alt=HQ4G6FjmW8yZ15XGoiQdGDvbi5C7fJKktNg6pzCzdHg4",
+   "family": "alt",
+   "value": "HQ4G6FjmW8yZ15XGoiQdGDvbi5C7fJKktNg6pzCzdHg4",
+   "display": "lookup table HQ4G6F…",
+   "weight": 4,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": null,
+    "hex": "f3a30925a2b5b5043d4563f60674aeb76c6cf1d82c97c4b07a0dd1de37cf07e9"
+   }
+  },
+  {
+   "id": "ix.seq=sys.transfer>sys.transfer>pump.create_v2>pump.extend_account>ata.create_idempotent>pump.buy_exact_sol_in",
+   "family": "ix.seq",
+   "value": "sys.transfer>sys.transfer>pump.create_v2>pump.extend_account>ata.create_idempotent>pump.buy_exact_sol_in",
+   "display": "sys.transfer > sys.transfer > pump.create_v2 > pump.extend_account > ata.create_idempotent > pump.buy_exact_sol_in",
+   "weight": 3,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "tip.relay=lunarlander",
+   "family": "tip.relay",
+   "value": "lunarlander",
+   "display": "tip relay lunarlander",
+   "weight": 2,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": 0,
+    "hex": "0b7a7add21e74f2088d21b7fab5fded0f4dfb171609a8cda3961892e8017aca4"
+   }
+  },
+  {
+   "id": "xfer.dest=uxtoRPdPjRekYmxs1uUqVRZWh38iqonc9KgPuZXPeSY",
+   "family": "xfer.dest",
+   "value": "uxtoRPdPjRekYmxs1uUqVRZWh38iqonc9KgPuZXPeSY",
+   "display": "transfer to uxtoRP…",
+   "weight": 2,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": 1,
+    "hex": "0d91668e87e64a161eba015cfef2b7d3ade6ce2cc61b58b4d777776ce501964d"
+   }
+  },
+  {
+   "id": "tip.lamports=3000000",
+   "family": "tip.lamports",
+   "value": "3000000",
+   "display": "lunarlander tip 0.003 SOL",
+   "weight": 1.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 0,
+    "hex": "02000000c0c62d0000000000"
+   },
+   "bucket": "tip.lamports~2^21"
+  },
+  {
+   "id": "buy.variant=buy_exact_sol_in",
+   "family": "buy.variant",
+   "value": "buy_exact_sol_in",
+   "display": "same-tx buy_exact_sol_in",
+   "weight": 1.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 5,
+    "hex": "38fc74089edfcd5f"
+   }
+  },
+  {
+   "id": "mint.suffix=pump",
+   "family": "mint.suffix",
+   "value": "pump",
+   "display": "mint …pump (ground vanity)",
+   "weight": 1.5,
+   "matched": true,
+   "source": {
+    "where": "key",
+    "ixIndex": null,
+    "hex": "2bdbb475e8f90f30cede0e4cecbc54111f473a2bc006b6352a632211258fe36f"
+   }
+  },
+  {
+   "id": "version=0",
+   "family": "version",
+   "value": "0",
+   "display": "tx version 0",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "meta",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "cu.source=none",
+   "family": "cu.source",
+   "value": "none",
+   "display": "budget lives in none",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "meta",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "tip.position=before-create",
+   "family": "tip.position",
+   "value": "before-create",
+   "display": "tip before-create",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "xfer.count=1",
+   "family": "xfer.count",
+   "value": "1",
+   "display": "1 other transfer",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "create.variant=create_v2+extend",
+   "family": "create.variant",
+   "value": "create_v2+extend",
+   "display": "create_v2 + extend_account",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "args",
+    "ixIndex": 2,
+    "hex": "d6904cec5f8b31b4"
+   }
+  },
+  {
+   "id": "followers.adjacent=0",
+   "family": "followers.adjacent",
+   "value": "0",
+   "display": "0 adjacent same-slot txs",
+   "weight": 1,
+   "matched": true,
+   "source": {
+    "where": "followers",
+    "ixIndex": null,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=sys.transfer>sys.transfer",
+   "family": "ix.shingle",
+   "value": "sys.transfer>sys.transfer",
+   "display": "sys.transfer → sys.transfer",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 0,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=sys.transfer>pump.create_v2",
+   "family": "ix.shingle",
+   "value": "sys.transfer>pump.create_v2",
+   "display": "sys.transfer → pump.create_v2",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 1,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=pump.create_v2>pump.extend_account",
+   "family": "ix.shingle",
+   "value": "pump.create_v2>pump.extend_account",
+   "display": "pump.create_v2 → pump.extend_account",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 2,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=pump.extend_account>ata.create_idempotent",
+   "family": "ix.shingle",
+   "value": "pump.extend_account>ata.create_idempotent",
+   "display": "pump.extend_account → ata.create_idempotent",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 3,
+    "hex": null
+   }
+  },
+  {
+   "id": "ix.shingle=ata.create_idempotent>pump.buy_exact_sol_in",
+   "family": "ix.shingle",
+   "value": "ata.create_idempotent>pump.buy_exact_sol_in",
+   "display": "ata.create_idempotent → pump.buy_exact_sol_in",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "ix",
+    "ixIndex": 4,
+    "hex": null
+   }
+  },
+  {
+   "id": "signers=2",
+   "family": "signers",
+   "value": "2",
+   "display": "2 signers",
+   "weight": 0.5,
+   "matched": true,
+   "source": {
+    "where": "meta",
+    "ixIndex": null,
+    "hex": null
+   }
+  }
+ ],
+ "neighbours": [
+  {
+   "mint": "8mqcd11jFaXegrWYQSMQkBMNjo8aXBseKrdQENPGpump",
+   "signature": "5qonUo7FjQJm53tVG3KDJ4p2tA3u3W7cKBDRRJAqzU8CFExZLHpMryey1L1Mi5C5vzJQ6wSLPwbwRX1hrHbKVJns",
+   "symbol": "PUMPY",
+   "label": "uxento",
+   "similarity": 1,
+   "barrelId": "B-CY4PJC"
+  },
+  {
+   "mint": "GHPwq4wUbYiCgL3w5EATuxQHs75TDfXck3Ai6R8Ppump",
+   "signature": "4JeNS2rTyc6sDgDWysnFLoS93kNcA75qpzLRhMW7Lf2CLC2zrk9RwLgbCBvriP534orHtfKcNQJts8AGJZhD67mp",
+   "symbol": "BATE",
+   "label": "uxento",
+   "similarity": 1,
+   "barrelId": "B-CY4PJC"
+  },
+  {
+   "mint": "51zXtMTUF14ADB16pEPpSVQJNSXpbjHPRQNtybzpump",
+   "signature": "2yibRFMRAdGBfReqRTuyt59fUYMu1b1epY1aCsKTirrd5rJ52oe3PdM3i7yWCQKaHGXriYHXDDMwUDShCcWg4Qea",
+   "symbol": "Adora",
+   "label": "uxento",
+   "similarity": 1,
+   "barrelId": "B-CY4PJC"
+  },
+  {
+   "mint": "9Wec3nPjy1YCVhnb5tjSxF94kWZCittFz2M1xBXYpump",
+   "signature": "4NDeMtzEcKLnRMEyLmCmHiSMhvtX44usXt2EV3LLCnoKwieER4CgFZX1W5dpJrVTrFZ2UYBwfPu8pSUDCgQdRdds",
+   "symbol": "Chameleon",
+   "label": "uxento",
+   "similarity": 1,
+   "barrelId": "B-CY4PJC"
+  },
+  {
+   "mint": "2mffxQ1MVrHgKKfHA6gVjqhfeqxn4KUHtQApJUUgpump",
+   "signature": "4CfyMSDpXjV69jELLgBjH4xg4c5dtxNwzvhgRjQTiedyBsbvm8A3CrBnJLYjDWdVsjCGnEoJK3WeHY72FmEb49UD",
+   "symbol": "HWB",
+   "label": "uxento",
+   "similarity": 1,
+   "barrelId": "B-CY4PJC"
+  }
+ ],
+ "followers": {
+  "sameSlot": 0,
+  "adjacent": 0,
+  "sample": []
+ },
+ "barrelMates": {
+  "reference": 27,
+  "recent": 0,
+  "windowMinutes": 30,
+  "sample": [
+   {
+    "mint": "5piXiXotoMHrE6XEENN6Hpjmx4drwpMvftwTMzdkpump",
+    "symbol": "goblin",
+    "blockTime": 1790311826
+   },
+   {
+    "mint": "Bqy9DSJGRbun7s8dr7mkN8fm3hPa44p64hhy3MQWpump",
+    "symbol": "Desk",
+    "blockTime": 1790317657
+   },
+   {
+    "mint": "88drpsMZZmB8U66Lr2hTdNF71oUPVs59qwu3V5QPpump",
+    "symbol": "ZOOP",
+    "blockTime": 1790295991
+   },
+   {
+    "mint": "8mqcd11jFaXegrWYQSMQkBMNjo8aXBseKrdQENPGpump",
+    "symbol": "PUMPY",
+    "blockTime": 1790207577
+   },
+   {
+    "mint": "GHPwq4wUbYiCgL3w5EATuxQHs75TDfXck3Ai6R8Ppump",
+    "symbol": "BATE",
+    "blockTime": 1790204664
+   },
+   {
+    "mint": "FAkyTGdNTvS4s3JM9sRe7nfrpXDScLS9P6fSqq9Dpump",
+    "symbol": "Fund",
+    "blockTime": 1790174124
+   },
+   {
+    "mint": "51zXtMTUF14ADB16pEPpSVQJNSXpbjHPRQNtybzpump",
+    "symbol": "Adora",
+    "blockTime": 1790343141
+   },
+   {
+    "mint": "9Wec3nPjy1YCVhnb5tjSxF94kWZCittFz2M1xBXYpump",
+    "symbol": "Chameleon",
+    "blockTime": 1790343039
+   }
+  ]
+ },
+ "closest": {
+  "label": "uxento",
+  "displayName": "uxento",
+  "score": 1
+ },
+ "comparedWith": {
+  "mint": "8mqcd11jFaXegrWYQSMQkBMNjo8aXBseKrdQENPGpump",
+  "signature": "5qonUo7FjQJm53tVG3KDJ4p2tA3u3W7cKBDRRJAqzU8CFExZLHpMryey1L1Mi5C5vzJQ6wSLPwbwRX1hrHbKVJns",
+  "symbol": "PUMPY",
+  "label": "uxento"
+ },
+ "source": "live",
+ "cached": false,
+ "ms": 179
+}

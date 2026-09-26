@@ -2,3 +2,8 @@ node_modules/
 data/.record-partial.json
 .DS_Store
 *.log
+app/node_modules/
+app/.data/
+app/site/dist/
+app/.env
+.netlify/

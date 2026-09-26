@@ -1,0 +1,13 @@
+# The live app (app/) deploys from this repo: Netlify builds the site and bundles the functions from app/.
+# The library at the repo root is imported by the functions (src/, data/reference.json, bench/results.json).
+[build]
+  base = "app"
+  command = "npm run build"
+  publish = "site/dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Scheduled function: app/netlify/functions/feed-refresh.mjs declares `config.schedule = '*/5 * * * *'` inline
+# (refreshes the live create feed every 5 minutes, ≤ 19 Helius credits a run). Nothing to add here.

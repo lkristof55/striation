@@ -2,7 +2,7 @@
   "measuredAt": "2026-09-25T13:38:53.472Z",
   "machine": "Mac17,3 · Apple M5 · 10 cores · 16 GB",
   "node": "v26.8.1",
-  "command": "cd oss && npm run bench",
+  "command": "npm run bench",
   "reference": {
     "size": 487,
     "stamped": 153,
@@ -115,46 +115,46 @@
       "name": "extract() create txs per second",
       "value": 4967,
       "unit": "tx/s",
-      "command": "cd oss && npm run bench",
+      "command": "npm run bench",
       "detail": "487 recorded create txs, legacy + v0 + v1"
     },
     {
       "name": "match() per query, reference n=487",
       "value": 77.6,
       "unit": "µs",
-      "command": "cd oss && npm run bench"
+      "command": "npm run bench"
     },
     {
       "name": "match() per query, 10k-instance replica",
       "value": 1114,
       "unit": "µs",
-      "command": "cd oss && npm run bench"
+      "command": "npm run bench"
     },
     {
       "name": "tokens per instance (mean)",
       "value": 18.8,
       "unit": "tokens",
-      "command": "cd oss && npm run bench"
+      "command": "npm run bench"
     },
     {
       "name": "Helius credits per /api/match (mint)",
       "value": 10,
       "unit": "credits",
-      "command": "cd oss && npm run bench",
+      "command": "npm run bench",
       "detail": "{\"getTransactionsForAddress\":1}"
     },
     {
       "name": "Helius credits per /api/match (signature)",
       "value": 1,
       "unit": "credits",
-      "command": "cd oss && npm run bench",
+      "command": "npm run bench",
       "detail": "{\"getTransaction\":1}"
     },
     {
       "name": "Helius credits per feed refresh (max)",
       "value": 19,
       "unit": "credits",
-      "command": "cd oss && npm run bench",
+      "command": "npm run bench",
       "detail": "{\"getSignaturesForAddress\":1,\"getTransaction\":18}"
     }
   ]

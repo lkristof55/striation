@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Striation ($STRIAE) · ballistics for pump.fun launches</title>
+<meta name="description" content="Striation reads how a pump.fun create transaction was built (compute budget, relay tip, lookup table, instruction order) and names the launch tool that fired it. Open-source library + live bench.">
+<meta name="theme-color" content="#E3E5E2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Striation ($STRIAE) · fresh wallet. fresh ticker. same barrel.">
+<meta property="og:description" content="Ballistics for pump.fun launches: fingerprint a create transaction and name the tool that fired it.">
+<meta property="og:image" content="/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/Mohave-VF-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/AtkinsonHyperlegibleMono-VF-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/AtkinsonHyperlegibleNext-VF-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<a class="skip mono" href="#match">skip to the bench</a>
+<div class="field" aria-hidden="true"></div>
+<canvas id="stage" aria-hidden="true"></canvas>
+<svg id="leaders" aria-hidden="true"></svg>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="chrome">
+  <a class="tl" href="#bench" aria-label="Striation, back to the top">
+    <img src="/logo.svg" alt="" width="34" height="34">
+    <span>
+      <span class="brand">Striation<small>$STRIAE</small></span>
+      <span class="mono study">study <b>pump.fun create</b> · series <b id="series">live feed</b></span>
+    </span>
+  </a>
+  <div class="tr">
+    <nav aria-label="Sections">
+      <a href="#bench" data-nav="bench" class="on">bench</a><a href="#mechanism" data-nav="mechanism">mechanism</a><a href="#match" data-nav="match">match</a><a href="#measured" data-nav="measured">measured</a><a href="#repo" data-nav="repo">repo ↗</a>
+    </nav>
+    <button class="menu mono" id="menuBtn" aria-expanded="false" aria-controls="menu">menu</button>
+    <div class="mono dicom" id="dicom"><span class="long">slot <b id="dSlot">·········</b> · <b id="dVer">v0</b> · <span id="dTime">reading the feed</span></span><span class="short"><b id="dVerS">v0</b> · <span id="dTimeS">feed</span></span></div>
+  </div>
+  <div class="br mono" id="br" aria-hidden="true"><span id="brA">slice <b>03</b>/11 · table <b>612.5 mm</b> · twist 5.5°</span><br><span id="brB">w 400 l 40 · reference <b id="refN">…</b> creates</span></div>
+  <div class="scale" aria-hidden="true"><i id="scaleTick"></i></div>
+</header>
+<div class="menu-sheet" id="menu" hidden>
+  <a href="#bench">bench</a><a href="#mechanism">mechanism</a><a href="#match">match</a><a href="#measured">measured</a><a href="#repo">repo</a>
+</div>
+
+<main>
+  <!-- 1 · bench -->
+  <section id="bench" class="hero" aria-labelledby="h1">
+    <div class="word hero-word" aria-hidden="true">Striation</div>
+    <div class="lede">
+      <div class="eyebrow mono"><span class="dot"></span><span>ballistics for pump.fun launches</span></div>
+      <h1 id="h1"><span class="ln">Fresh wallet.</span><span class="ln">Fresh ticker.</span><span class="ln tw">Same <span>barrel.</span></span></h1>
+      <p class="body">Striation reads how a create transaction was built (compute budget, relay tip, lookup table, instruction order) and names the launch tool that fired it. Wallets rotate. Guns don't.</p>
+      <form class="evidence" data-evidence>
+        <label class="mono" for="q1">evidence · mint or signature</label>
+        <div class="row"><span class="caret" aria-hidden="true"></span><input id="q1" name="q" autocomplete="off" spellcheck="false" placeholder="paste a pump.fun mint"><button type="submit">Scan</button></div>
+        <div class="hint mono"><span>try exhibit <button type="button" class="u b58" data-try>5DqS…n6Vm</button></span><span>cli <a class="u" href="#repo">striae &lt;mint&gt;</a></span></div>
+        <div class="msg mono" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="readout" id="readout" aria-label="Slice readout">
+      <div class="mono" id="roHead">slice <b>03</b> / 11 · ix <b>1</b> · computebudget</div>
+      <div class="k" id="roKey">cu price</div>
+      <div class="hex" id="roHex"></div>
+      <div class="eq mono-lc" id="roEq">&nbsp;</div>
+    </div>
+
+    <div class="tag" id="heroTag" aria-live="polite">
+      <span class="hole" aria-hidden="true"></span>
+      <div class="mono" data-t="head">exhibit <b>CHILL</b> · <span class="b58">5DqS…n6Vm</span><br>verdict <b>match</b> · stamp hidden</div>
+      <div class="who" data-t="who">j7tracker</div>
+      <div class="mono" data-t="barrel">barrel <b>B-······</b> · nearest ····…····</div>
+      <div class="meter" data-t="meter" aria-hidden="true"></div>
+      <div class="mono" data-t="foot"><b>·.··</b> similarity · <b>··/··</b> striae <span class="chip">sample</span></div>
+    </div>
+    <div class="mtag mono" id="mTag"><span class="who" data-t="who">j7tracker</span><span data-t="foot"><b>·.··</b> · ··/·· striae <span class="chip">sample</span></span></div>
+  </section>
+
+  <!-- 2–4 · mechanism (pinned stage) -->
+  <section id="mechanism" class="track" aria-label="How Striation reads a create">
+    <div class="markers" aria-hidden="true"><i id="m2"></i><i id="m3"></i><i id="m4"></i></div>
+    <div class="sticky">
+      <div class="beat b2" data-beat="2">
+        <h2><span class="ln">Every create</span><span class="ln">is a bullet.</span></h2>
+        <p class="sub">the grooves are how it was built.</p>
+        <p class="rule mono">one groove per striation · depth = weight · angle = fnv1a(token) · twist 5.5°</p>
+        <p class="body small">The library walks the create transaction once and emits about seventeen families of striations: compute budget, relay tip, lookup table, instruction order, create and buy variant, mint suffix, signers. Each one is a token with a weight. This bullet is engraved from those tokens, one groove each, and nothing else.</p>
+        <div class="labels" id="labels"></div>
+      </div>
+      <div class="beat b3" data-beat="3">
+        <h2><span class="ln">Scan the build,</span><span class="ln">not the wallet.</span></h2>
+        <div class="stop">
+          <div class="mono" id="s3Head">slice <b>01</b> / 11</div>
+          <div class="stopname" id="s3Name">tx version</div>
+          <div class="hex big" id="s3Hex"></div>
+          <div class="eq mono-lc" id="s3Eq">&nbsp;</div>
+          <p class="body small" id="s3Why"></p>
+        </div>
+        <div class="topo" id="topo"><canvas id="topoCv"></canvas><div class="topo-lines" id="topoLines"></div><div class="mono topo-cap">scout · the whole bullet, radiograph · planned slices</div></div>
+      </div>
+      <div class="beat b4" data-beat="4">
+        <h2><span class="ln tw">Same barrel.</span></h2>
+        <p class="sub">fresh wallet, fresh ticker. the rifling didn't change.</p>
+        <p class="body small">Left: the evidence, the featured create. Right: its nearest neighbour in the reference set. Same token, same angle. Turn the reference until the shared grooves run straight across the seam.</p>
+        <div class="scope" id="scope4" data-scope></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · match -->
+  <section id="match" class="flow" aria-labelledby="h5">
+    <div class="col-words">
+      <h2 id="h5"><span class="ln">Put your coin</span><span class="ln">on the bench.</span></h2>
+      <form class="evidence big" data-evidence>
+        <label class="mono" for="q2">evidence · mint or signature</label>
+        <div class="row"><span class="caret" aria-hidden="true"></span><input id="q2" name="q" autocomplete="off" spellcheck="false" placeholder="paste a mint or a create signature"><button type="submit">Scan</button></div>
+        <div class="hint mono"><span>try exhibit <button type="button" class="u b58" data-try>5DqS…n6Vm</button></span><span>or pick a row from the live feed</span></div>
+        <div class="msg mono" aria-live="polite"></div>
+      </form>
+      <div class="status mono-lc" id="status" aria-live="polite"></div>
+      <div class="feed" id="feed">
+        <div class="feed-head mono"><span><span class="live" id="liveDot"></span>live feed · pump.fun creates · <b id="feedRate">…</b></span><span id="feedAge"></span></div>
+        <div class="barbar" id="barbar" aria-label="Top barrels in the window"></div>
+        <ol class="rows" id="rows"></ol>
+      </div>
+    </div>
+    <div class="col-object">
+      <div class="result" id="result" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 6 · measured -->
+  <section id="measured" class="flow" aria-labelledby="h6">
+    <div class="col-words">
+      <h2 id="h6"><span class="ln">Measured,</span><span class="ln">with every stamp</span><span class="ln">hidden.</span></h2>
+      <p class="body">Labels come from the tools' own public stamps: the metadata host, the description, a cited fee collector. The stamps are taken off before matching, then each reference create is classified by the rest of the set. The numbers below are whatever that run produced on this machine, next to the baseline that always guesses the biggest tool.</p>
+    </div>
+    <div class="col-object" id="stats"><div class="mono">reading /api/stats…</div></div>
+  </section>
+
+  <!-- 7 · repo -->
+  <section id="repo" class="flow" aria-labelledby="h7">
+    <div class="col-words">
+      <h2 id="h7"><span class="ln">Take the bench</span><span class="ln">home.</span></h2>
+      <p class="body">Plain JavaScript with zero runtime dependencies; the core runs in Node and in the browser. Import it into a bot or an indexer, or run the CLI on any mint. The live bench above calls this same library through its endpoints.</p>
+      <div class="repo-block" id="repoBlock"></div>
+    </div>
+    <div class="col-object"><div class="code" id="code"></div></div>
+  </section>
+
+  <footer class="foot">
+    <div class="word foot-word" aria-hidden="true">Striation</div>
+    <div class="foot-lines mono-lc">
+      <p>striation reads transactions, not people. a match is a signal, not an accusation.</p>
+      <p>labels come from the tools' own public stamps. tool names are plain text, no logos, no endorsement.</p>
+      <p id="footRepo">MIT · <a class="u" data-repo href="#repo">github.com/lkristof55/striation</a> · $STRIAE has no token yet</p>
+    </div>
+  </footer>
+</main>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

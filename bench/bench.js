@@ -103,7 +103,7 @@ const cFeed = {}; await pollCreates(stubRpc(cFeed), { limit: 40, max: 18, gapMs:
 let machine = `${os.cpus()[0]?.model || os.arch()} · ${os.cpus().length} cores · ${Math.round(os.totalmem() / 2 ** 30)} GB`;
 try { machine = `${execSync('sysctl -n hw.model', { encoding: 'utf8' }).trim()} · ${machine}`; } catch {}
 
-const cmd = 'cd oss && npm run bench';
+const cmd = 'npm run bench';
 const results = {
   measuredAt: new Date().toISOString(),
   machine, node: process.version, command: cmd,
