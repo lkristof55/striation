@@ -202,14 +202,14 @@ GitHub searches for "launch tool fingerprint solana", "transaction fingerprint s
 
 ## The live app
 
-[`app/`](app/README.md) is the complete source of **https://striation.netlify.app**: the Netlify Functions that run this library on live pump.fun creates (`/api/match`, `/api/feed`, `/api/barrels`, `/api/stats`, `/api/health`, plus a scheduled feed refresh every 5 minutes), and the site. The functions import `src/`, `data/reference.json` and `bench/results.json` from this repo, so the demo is the library; the library never imports from `app/`.
+[`app/`](app/README.md) is the complete source of the live app at **https://striation.anyfee.workers.dev** (Cloudflare Workers, free plan; the Netlify copy at striation.netlify.app is paused): the Netlify Functions that run this library on live pump.fun creates (`/api/match`, `/api/feed`, `/api/barrels`, `/api/stats`, `/api/health`, plus a scheduled feed refresh every 5 minutes), and the site. The functions import `src/`, `data/reference.json` and `bench/results.json` from this repo, so the demo is the library; the library never imports from `app/`.
 
 ```bash
 cd app && npm ci && cp .env.example .env   # put a Helius key in .env
 npm test && npm run build && npm run dev   # → http://localhost:8888
 ```
 
-Deploy your own copy: create a Netlify site from this repo (the root `netlify.toml` builds `app/`) and set `HELIUS_API_KEY`. Details, endpoints, costs and asset credits: [`app/README.md`](app/README.md).
+Deploy your own copy: create a Netlify site from this repo (the root `netlify.toml` builds `app/`) and set `HELIUS_API_KEY`, or deploy `app/` as a Cloudflare Worker (`app/wrangler.jsonc`: the same functions, a D1 table instead of Netlify Blobs, and a cron trigger; on the Workers Free plan each scheduled refresh classifies 6 creates instead of 18). Details, endpoints, costs, the free-plan budgets and asset credits: [`app/README.md`](app/README.md).
 
 ## License
 

@@ -148,8 +148,9 @@ export function createBenchUI({ renderer, env, mobile, onLoading, onResult, scro
     const rows = $('#rows'); const prev = new Set($$('#rows li').map((li) => li.dataset.m));
     $('#feedRate').textContent = f.sample ? 'sample, the feed endpoint is not answering' : `${f.items.length} ${plural(f.items.length, 'create')} · ${f.ratePerMin ?? '—'}/min · ${Math.round((f.stampedShare || 0) * 100)}% stamped · ${f.source}`;
     const age = f.updatedAt ? Math.round((Date.now() - Date.parse(f.updatedAt)) / 1000) : null;
-    $('#feedAge').textContent = f.sample ? '' : age != null && age > 300 ? `stored feed from ${new Date(f.updatedAt).toISOString().slice(11, 16)} utc · refreshing` : age != null && age > 120 ? `feed from ${new Date(f.updatedAt).toISOString().slice(11, 16)} utc, stored. the rpc is slow right now.` : `updated ${age ?? '—'} s ago`;
-    if (!f.items?.length) { rows.innerHTML = `<li class="empty">${f.sample ? 'the feed endpoint is not answering. nothing is shown rather than something made up.' : 'no creates in the window. the feed refreshes every 30 s.'}</li>`; $('#barbar').innerHTML = ''; return; }
+    const timing = api.feedTiming(f);
+    $('#feedAge').textContent = f.sample ? '' : age != null && age > timing.old ? `stored feed from ${new Date(f.updatedAt).toISOString().slice(11, 16)} utc · ${timing.late}` : age != null && age > timing.slow ? `feed from ${new Date(f.updatedAt).toISOString().slice(11, 16)} utc, stored. the rpc is slow right now.` : `updated ${age ?? '—'} s ago`;
+    if (!f.items?.length) { rows.innerHTML = `<li class="empty">${f.sample ? 'the feed endpoint is not answering. nothing is shown rather than something made up.' : `no creates in the window. the feed refreshes every ${timing.every}.`}</li>`; $('#barbar').innerHTML = ''; return; }
     let fresh = 0;
     rows.innerHTML = f.items.map((it) => {
       const isNew = prev.size && !prev.has(it.mint); if (isNew) fresh++;

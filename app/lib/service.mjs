@@ -5,7 +5,7 @@ import benchResults from '../../bench/results.json' with { type: 'json' };
 import fixtureFeatured from './featured-fixture.json' with { type: 'json' };
 import { findCreate, verdictFor, pollCreates, inputKind } from '../../src/classify.js';
 import { stampsFromMetadata, StriaeError } from '../../src/extract.js';
-import { toInstance, tokenList } from '../../src/match.js';
+import { toInstance, tokenList, barrelId } from '../../src/match.js';
 import { summarizeBarrels } from '../../src/barrels.js';
 import { TOOL_NAMES } from '../../src/tables.js';
 import { helius, fetchMetadata } from './sources.mjs';
@@ -18,6 +18,19 @@ export const RECENT_CAP = 600;
 export const REF_LIVE_CAP = 600;
 export const FEED_STALE_SECONDS = 30;
 export const METADATA_BUDGET_MS = 2500;
+
+/**
+ * Runtime knobs. Netlify and `npm run dev` use these defaults; app/worker.mjs switches to the Cloudflare
+ * ones (configureRuntime) before any handler runs.
+ *  - scheduledOnly: /api/feed only serves the stored snapshot (never a refresh, inline or in waitUntil),
+ *    the cron is the only refresh, and /api/barrels caches its body per snapshot in the store.
+ *  - refreshSeconds: the cron period; sent to the site as feed.refreshSeconds when scheduledOnly.
+ *  - refreshMax: creates classified per refresh (each costs about 0.7 ms CPU and 1 to 3 fetches).
+ *  - refLiveCap: stamped live creates kept in the reference next to the bundled 487 (every match and
+ *    every barrels summary scans all of them).
+ */
+export const runtime = { scheduledOnly: false, refreshSeconds: null, refreshMax: 18, refLiveCap: REF_LIVE_CAP };
+export function configureRuntime(opts = {}) { Object.assign(runtime, opts); }
 
 const mem = new TTLCache(1000);
 
@@ -126,17 +139,42 @@ export function betterFeatured(cand, cur) {
 // ---------- store-backed state ----------
 
 let refCache = null;
-export async function reference() {
-  if (refCache && Date.now() - refCache.at < 60_000) return refCache.ref;
+/**
+ * The bundled reference merged with the stamped live instances. Cached for 60 s, or, when the caller passes
+ * the state's refRev (the revision refreshFeed stamps whenever it rewrites ref-live), until that changes.
+ */
+export async function reference(rev) {
+  if (refCache && (rev != null ? refCache.rev === rev : Date.now() - refCache.at < 60_000)) return refCache.ref;
   let live = [];
   try { live = (await (await getStore('ref-live')).get('instances')) || []; } catch { /* bundled only */ }
+  if (live.length > runtime.refLiveCap) live = live.slice(0, runtime.refLiveCap);
   const ref = mergeReference(bundled, live);
-  refCache = { at: Date.now(), ref };
+  refCache = { at: Date.now(), rev: rev ?? null, ref, live };
   return ref;
 }
 
 async function readState() {
   try { return (await (await getStore('recent')).get('state')) || null; } catch { return null; }
+}
+
+/** The state and the merged reference. Scheduled mode reads the state first so its refRev can skip ref-live. */
+async function stateAndReference() {
+  if (!runtime.scheduledOnly) { const [ref, state] = await Promise.all([reference(), readState()]); return { ref, state }; }
+  const state = await readState();
+  return { ref: await reference(state?.refRev), state };
+}
+
+/**
+ * setJSON of a newest-first list (or a document wrapping one) that drops the oldest entries while the store
+ * rejects the value as too large (D1: 2 MB per value). Netlify Blobs and the file store never reject.
+ */
+export async function setBounded(store, key, list, wrap = (l) => l) {
+  for (let n = list.length; ; n = Math.floor(n * 0.75)) {
+    try { return await store.setJSON(key, wrap(n === list.length ? list : list.slice(0, n))); } catch (e) {
+      if (e?.code !== 'TOO_LARGE' || n === 0) throw e;
+      console.warn(`[store] ${key}: ${n} entries are over the value limit, keeping the newest ${Math.floor(n * 0.75)}`);
+    }
+  }
 }
 
 export function finishMatch(v, ref, recent, extra, endSec) {
@@ -158,7 +196,7 @@ export async function matchInput({ kind, value }) {
   const hit = mem.get(`match:${value}`);
   if (hit) {
     // The verdict is immutable; the barrel-mate counts follow the current snapshot of the recent store.
-    const [ref, state] = await Promise.all([reference(), readState()]);
+    const { ref, state } = await stateAndReference();
     return maskDeep({ ...hit, barrelMates: barrelMates(hit, ref, state?.items || [], windowEnd(state)), cached: true, ms: Date.now() - t0 });
   }
 
@@ -174,8 +212,7 @@ export async function matchInput({ kind, value }) {
     if (kind === 'sig') ex.followers = null;
     try { await exStore?.setJSON(exKey, { at: Date.now(), ex }); } catch { /* cache is best effort */ }
   }
-  const ref = await reference();
-  const state = await readState();
+  const { ref, state } = await stateAndReference();
   const v = verdictFor(ex, ref);
   const out = finishMatch(v, ref, state?.items || [], { source: 'live' }, windowEnd(state));
   mem.set(`match:${value}`, out, 300);
@@ -188,15 +225,16 @@ async function pool(items, n, fn) {
 }
 
 /**
- * One feed refresh: 1 getSignaturesForAddress + ≤ 18 getTransaction (batches of 10, 400 ms apart),
- * metadata stamps for the new creates, verdicts, then the rolling `recent` window and `ref-live`.
+ * One feed refresh: 1 getSignaturesForAddress + ≤ `max` getTransaction (batches of 10, 400 ms apart; max is
+ * runtime.refreshMax, 18 by default), metadata stamps for the new creates, verdicts, then `ref-live` and the
+ * rolling `recent` window (in that order, so a reader that sees the new refRev finds the new instances).
  */
-export async function refreshFeed() {
+export async function refreshFeed({ max = runtime.refreshMax } = {}) {
   const store = await getStore('recent');
   const prev = (await store.get('state')) || { items: [] };
   const known = new Set((prev.items || []).map((i) => i.signature));
-  const poll = await pollCreates(helius(), { limit: 40, max: 18, known });
-  const ref = await reference();
+  const poll = await pollCreates(helius(), { limit: 40, max, known });
+  const ref = await reference(prev.refRev);
   const fresh = poll.fresh.filter((f) => f.ex);
   // Metadata stamps are optional: one shared 2.5 s budget so a slow IPFS gateway never stalls the feed.
   const got = new Map();
@@ -219,19 +257,22 @@ export async function refreshFeed() {
   }
   const items = pruneWindow([...newItems, ...(prev.items || [])], nowSec);
   if (featured) featured.barrelMates = barrelMates(featured, ref, items, nowSec);
+  let refRev = prev.refRev ?? null;
+  if (newRef.length) {
+    const rl = await getStore('ref-live');
+    const cur = (prev.refRev != null && refCache?.rev === prev.refRev ? refCache.live : await rl.get('instances')) || [];
+    await setBounded(rl, 'instances', [...newRef, ...cur].slice(0, runtime.refLiveCap));
+    refCache = null;
+    refRev = `${nowSec}.${Math.random().toString(36).slice(2, 8)}`;
+  }
   const state = {
     updatedAt: new Date(nowSec * 1000).toISOString(),
     ratePerMin: poll.ratePerMin || prev.ratePerMin || 0,
     sigWindowSeconds: poll.windowSeconds,
     items, featured,
+    ...(refRev ? { refRev } : {}),
   };
-  await store.setJSON('state', state);
-  if (newRef.length) {
-    const rl = await getStore('ref-live');
-    const cur = (await rl.get('instances')) || [];
-    await rl.setJSON('instances', [...newRef, ...cur].slice(0, REF_LIVE_CAP));
-    refCache = null;
-  }
+  await setBounded(store, 'state', items, (kept) => (kept === items ? state : { ...state, items: kept }));
   return { state, fetched: poll.fresh.length, added: newItems.length };
 }
 
@@ -249,6 +290,7 @@ export function refreshOnce() {
  */
 export async function feed(limit, defer) {
   let state = await readState();
+  if (runtime.scheduledOnly) return scheduledFeed(state, limit);
   const age = state ? (Date.now() - Date.parse(state.updatedAt)) / 1000 : Infinity;
   let upstreamError = null;
   if (state && age > FEED_STALE_SECONDS && defer) {
@@ -260,6 +302,24 @@ export async function feed(limit, defer) {
     return feedResponse({ updatedAt: fixtureFeatured.recordedAt || new Date().toISOString(), items: [], ratePerMin: 0, featured: null }, limit, upstreamError || { code: 'UPSTREAM' });
   }
   return feedResponse(state, limit, upstreamError, await reference());
+}
+
+/**
+ * /api/feed on Cloudflare: the stored snapshot only, whatever its age (the cron is the only refresh). The body
+ * is the Netlify one plus `refreshSeconds` (the cron period). A cron that is two periods late shows as
+ * `stale: true` with a note; an empty store (before the first cron run) answers with the recorded fixture hero,
+ * `source: 'fixture'`, `stale: true` and `warming: true`.
+ */
+async function scheduledFeed(state, limit) {
+  const every = runtime.refreshSeconds || 300;
+  if (!state) {
+    const body = feedResponse({ updatedAt: fixtureFeatured.recordedAt || new Date().toISOString(), items: [], ratePerMin: 0, featured: null }, limit, { code: 'WARMING_UP' });
+    return { ...body, warming: true, note: `warming up: no feed is stored yet; the scheduled refresh stores one every ${Math.round(every / 60)} minutes`, refreshSeconds: every };
+  }
+  const age = (Date.now() - Date.parse(state.updatedAt)) / 1000;
+  const late = age > every * 2 + 60;
+  const body = feedResponse(state, limit, late ? { code: 'LATE' } : null, await reference(state.refRev));
+  return { ...body, ...(late ? { note: `the scheduled refresh has not stored a newer feed since ${state.updatedAt}; serving the last stored feed` } : {}), refreshSeconds: every };
 }
 
 /**
@@ -278,7 +338,7 @@ export function feedResponse(state, limit, upstreamError = null, ref = null) {
     windowSeconds: times.length > 1 ? Math.max(...times) - Math.min(...times) : 0,
     ratePerMin: state.ratePerMin || 0,
     stampedShare: items.length ? Math.round((items.filter((i) => i.stamp).length / items.length) * 1000) / 1000 : 0,
-    sampled: { items: items.length, note: 'each refresh classifies at most 18 of the newest creates; counts are over the sampled creates' },
+    sampled: { items: items.length, note: `each refresh classifies at most ${runtime.refreshMax} of the newest creates; counts are over the sampled creates` },
     items: items.slice(0, limit).map(({ tokens, ...i }) => i),
     barrels: barrelCounts(items),
     featured,
@@ -287,11 +347,28 @@ export function feedResponse(state, limit, upstreamError = null, ref = null) {
 }
 
 const barrelsCache = new TTLCache(4);
-/** GET /api/barrels core (no Helius calls). Cached per snapshot, so it never lags the feed's store. */
+/**
+ * GET /api/barrels core (no Helius calls). Cached per snapshot, so it never lags the feed's store. In
+ * scheduled mode the body is also kept in the store (`recent/barrels-view`), so each snapshot is summarized
+ * once, by the first request that reads it, instead of once per isolate.
+ */
 export async function barrelsView() {
+  if (runtime.scheduledOnly) return storedBarrels(await readState());
   const [ref, state] = await Promise.all([reference(), readState()]);
   const key = `${state?.updatedAt || '-'}|${ref.size}`;
   return barrelsCache.get(key) || barrelsCache.set(key, barrelsFromState(ref, state), 300);
+}
+
+async function storedBarrels(state) {
+  const key = `${state?.updatedAt || '-'}|${state?.refRev ?? '-'}`;
+  const hit = barrelsCache.get(key);
+  if (hit) return hit;
+  const store = await getStore('recent');
+  const saved = await store.get('barrels-view').catch(() => null);
+  if (saved?.key === key) return barrelsCache.set(key, saved.body, 300);
+  const body = barrelsFromState(await reference(state?.refRev), state);
+  await store.setJSON('barrels-view', { key, body }).catch((e) => console.error('[barrels] store:', e.message));
+  return barrelsCache.set(key, body, 300);
 }
 
 /**
@@ -312,7 +389,39 @@ export function barrelsFromState(ref, state) {
       size: ref.size, stamped: ref.stamped, unlabelled: ref.unlabelled, builtAt: ref.builtAt, liveAdded: ref.liveAdded || 0,
       labels: Object.entries(ref.labels).sort((a, b) => b[1] - a[1]).map(([label, count]) => ({ label, displayName: TOOL_NAMES[label] || label, count })),
     },
-    barrels: summarizeBarrels(ref.instances, { recent, max: 16 }),
+    barrels: summarizeTop(ref.instances, { recent, max: 16 }),
+  });
+}
+
+/**
+ * The library's summarizeBarrels(instances, { recent, max }), computed only for the rows it returns. The
+ * library ranks every barrel (label, reference and recent counts, cheap), then describes every barrel (token
+ * frequencies, the striation signature, number formatting: most of its CPU), and returns `max` rows. This ranks
+ * with the same rules, describes only the winners through the library, and restores `share` over the whole
+ * window: the same rows, byte for byte (test/barrels-top.test.mjs compares both on many random windows).
+ */
+export function summarizeTop(instances, { recent = [], max = 16 } = {}) {
+  const ids = instances.map((i) => i.barrelId || barrelId(i));
+  const groups = new Map();
+  const get = (id) => { let g = groups.get(id); if (!g) groups.set(id, (g = { id, members: [], recent: 0 })); return g; };
+  instances.forEach((inst, k) => get(ids[k]).members.push(inst));
+  for (const r of recent) get(r.barrelId).recent++;
+  const ranked = [...groups.values()].map((g) => {
+    const counts = {};
+    for (const m of g.members) if (m.label) counts[m.label] = (counts[m.label] || 0) + 1;
+    const [top, n] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0] || [null, 0];
+    return { id: g.id, label: top && n >= g.members.length / 2 ? top : null, referenceCount: g.members.length, recentCount: g.recent };
+  });
+  const labelled = ranked.filter((r) => r.label).sort((a, b) => (b.recentCount + b.referenceCount) - (a.recentCount + a.referenceCount));
+  const unlabelled = ranked.filter((r) => !r.label).sort((a, b) => b.recentCount - a.recentCount || b.referenceCount - a.referenceCount);
+  const pickL = labelled.slice(0, Math.min(labelled.length, Math.ceil(max * 0.625)));
+  const picked = new Set([...pickL, ...unlabelled.slice(0, max - pickL.length)].map((r) => r.id));
+  const rows = summarizeBarrels(instances.filter((_, k) => picked.has(ids[k])), { recent: recent.filter((r) => picked.has(r.barrelId)), max });
+  const total = recent.length;
+  const size = instances.length;
+  return rows.map((row) => {
+    const g = groups.get(row.barrelId);
+    return { ...row, share: Math.round((total ? g.recent / total : g.members.length / (size || 1)) * 1000) / 1000 };
   });
 }
 

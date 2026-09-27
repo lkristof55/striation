@@ -111,7 +111,7 @@ async function boot() {
   // different limit skips both the browser cache and the function's per-limit cache. Rows stay at 24.
   const ageS = (f) => (f?.updatedAt ? (Date.now() - Date.parse(f.updatedAt)) / 1000 : 0);
   async function catchUp(k = 0) {
-    if (feed.sample || ageS(feed) <= 300 || k > 3) return;
+    if (feed.sample || ageS(feed) <= api.feedTiming(feed).old || k > 3) return;
     await new Promise((r) => setTimeout(r, [3000, 5000, 8000, 14000][k]));
     const f = await api.feed(25 + k, { fresh: true });
     if (!f.sample && Date.parse(f.updatedAt) > Date.parse(feed.updatedAt || 0)) swapFeatured(f);

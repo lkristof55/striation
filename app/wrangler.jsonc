@@ -1,0 +1,30 @@
+// Cloudflare Workers config for the live app (Workers Free plan). Netlify keeps using netlify.toml at the repo root.
+// How to deploy, the budgets and what degrades on the free plan: app/README.md, "Deploy to Cloudflare Workers".
+{
+  "name": "striation",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-01",
+  // nodejs_compat also fills process.env from vars and secrets, which is where lib/ reads its keys
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "site/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "striation-store",
+      "database_id": "454b6705-4e55-4b5f-b6ed-aa7f23d33897",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // the scheduled feed refresh (netlify/functions/feed-refresh.mjs has the same schedule)
+  "triggers": { "crons": ["*/5 * * * *"] },
+  // "1" = Workers Free budgets: 6 creates per refresh, 300 live reference creates, 45 fetches per invocation.
+  // "0" = Workers Paid: 18, 600, 900 (as on Netlify). Each one can be overridden: FEED_REFRESH_MAX, REF_LIVE_CAP, FETCH_BUDGET.
+  "vars": { "CF_FREE_PLAN": "1" },
+  "observability": { "enabled": true }
+}

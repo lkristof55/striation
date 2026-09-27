@@ -19,6 +19,13 @@ export async function feed(limit = 24, { fresh = false } = {}) {
   if (r.ok && r.data?.featured) return r.data;
   return { ...SAMPLE_FEED, offline: true, error: r.error };
 }
+// When a stored feed counts as slow or late. Netlify refreshes on page views (a feed older than 30 s);
+// Cloudflare refreshes on a schedule only and says how often in feed.refreshSeconds (300).
+export function feedTiming(f) {
+  const every = f?.refreshSeconds;
+  if (!every) return { every: '30 s', slow: 120, old: 300, late: 'refreshing' };
+  return { every: every >= 120 ? `${Math.round(every / 60)} min` : `${every} s`, slow: every + 120, old: every * 2 + 60, late: 'the scheduled refresh is late' };
+}
 export const match = (q) => get(`/api/match?${q.kind}=${encodeURIComponent(q.value)}`, { timeout: 30000 });
 export const barrels = () => get('/api/barrels');
 export const stats = () => get('/api/stats');
